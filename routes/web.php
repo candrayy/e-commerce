@@ -26,3 +26,6 @@ Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 Route::get('/produk', [ProdukController::class, 'index'])->name('produk');
 Route::get('/tambah-produk', [ProdukController::class, 'create'])->name('tambah-produk');
 Route::post('/simpan-produk', [ProdukController::class, 'store'])->name('simpan-produk');
+Route::get('/edit-produk/{id}', [ProdukController::class, 'edit'])->name('edit-produk');
+Route::post('/update-produk/{id}', [ProdukController::class, 'update'])->name('update-produk');
+Route::get('/hapus-produk/{id}', [ProdukController::class, 'destroy'])->name('hapus-produk');

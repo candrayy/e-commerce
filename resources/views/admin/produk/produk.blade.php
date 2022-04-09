@@ -245,8 +245,8 @@
                                         <td>Rp {{ $item->harga }}</td>
                                         <td>{!! Str::limit($item->deskripsi, 25) !!}</td>
                                         <td>
-                                            <a href="#" class="btn btn-success btn-icon btn-sm" type="button"><span>Ubah</span></a>
-                                            <a href="#" class="btn btn-danger btn-icon btn-sm" type="button"><span>Hapus</span></a>
+                                            <a href="{{ route('edit-produk', $item->id) }}" class="btn btn-success btn-icon btn-sm" type="button"><span>Ubah</span></a>
+                                            <a href="{{ route('hapus-produk', $item->id) }}" class="btn btn-danger btn-icon btn-sm" type="button"><span>Hapus</span></a>
                                         </td>
                                     </tr>
                                     @endforeach

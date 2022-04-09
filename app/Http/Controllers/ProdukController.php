@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use App\Models\Produk;
-use App\Models\User;
 
 class ProdukController extends Controller
 {
@@ -29,8 +28,7 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        $usr = User::all();
-        return view('admin.produk.tambah-produk', compact('usr'));
+        return view('admin.produk.tambah-produk');
     }
 
     /**
@@ -77,7 +75,8 @@ class ProdukController extends Controller
      */
     public function edit($id)
     {
-        //
+        $dtProduk = Produk::findorfail($id);
+        return view('admin.produk.edit-produk', compact('dtProduk'));
     }
 
     /**
@@ -89,7 +88,21 @@ class ProdukController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $dtProduk = Produk::findorfail($id);
+        $dtProduk->kd_produk = $request->kd_produk;
+        $dtProduk->nama_produk = $request->nama_produk;
+        $dtProduk->harga = $request->harga;
+        $dtProduk->deskripsi = $request->deskripsi;
+        if($request->hasfile('gambar'))
+        {
+            $file = $request->file('gambar');
+            $extention = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extention;
+            $file->move('images/produk/', $filename);
+            $dtProduk->gambar = $filename;
+        }
+        $dtProduk->update();
+        return redirect('produk');
     }
 
     /**
@@ -100,6 +113,13 @@ class ProdukController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $dtProduk = Produk::findorfail($id);
+        $destination = 'images/produk/'.$dtProduk->gambar;
+        if(file::exists($destination))
+        {
+            File::delete($destination);
+        }
+        $dtProduk->delete();
+        return redirect('produk');
     }
 }
