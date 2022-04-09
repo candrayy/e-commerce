@@ -81,7 +81,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('kategori') }}">
                     <i class="fas fa-fw fa-book"></i>
                     <span>Kategori</span>
                 </a>
@@ -226,6 +226,14 @@
                             <div class="mb-3">
                                 <label for="gambar" class="form-label">Pilih Gambar</label>
                                 <input type="file" id="gambar" name="gambar" class="form-control" style="height: 45px" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="kategori_id" class="form-label">Kategori</label>
+                                <select class="form-control" name="kategori_id" id="kategori_id">
+                                @foreach($dtKategori as $item)
+                                <option value="{{ $item->id }}" required>{{ $item->nama_kategori }}</option>
+                                @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="kd_produk" class="form-label">Kode Produk</label>

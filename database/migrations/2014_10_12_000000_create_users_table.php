@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('kota');
             $table->string('kode_pos');
             $table->string('no_hp');
+            $table->string('role');
             $table->rememberToken();
             $table->timestamps();
         });

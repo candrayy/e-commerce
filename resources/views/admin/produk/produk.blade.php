@@ -10,6 +10,7 @@
     <meta name="author" content="">
 
     <title>Admin - Produk</title>
+    <link rel="icon" href="assets/images/shops.png">
 
     <!-- Custom fonts for this template-->
     <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -81,7 +82,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('kategori') }}">
                     <i class="fas fa-fw fa-book"></i>
                     <span>Kategori</span>
                 </a>
@@ -226,6 +227,7 @@
                                     <tr>
                                         <th scope="col">No</th>
                                         <th scope="col">Gambar</th>
+                                        <th scope="col">Kategori</th>
                                         <th scope="col">Kode Produk</th>
                                         <th scope="col">Nama Produk</th>
                                         <th scope="col">Harga</th>
@@ -240,6 +242,7 @@
                                         <td>
                                             <img src="{{ asset('images/produk/'.$item->gambar) }}" width="150px" height="100px" alt="image">
                                         </td>
+                                        <td>{{ $item->kategori->nama_kategori }}</td>
                                         <td>{{ $item->kd_produk }}</td>
                                         <td>{{ $item->nama_produk }}</td>
                                         <td>Rp {{ $item->harga }}</td>

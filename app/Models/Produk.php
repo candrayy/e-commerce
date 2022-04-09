@@ -13,11 +13,16 @@ class Produk extends Model
     protected $primaryKey = 'id';
     public $timestamp = false;
     protected $fillable = [
-        'gambar', 'kd_produk', 'nama_produk', 'harga', 'stok', 'deskripsi',
+        'kategori_id', 'gambar', 'kd_produk', 'nama_produk', 'harga', 'stok', 'deskripsi',
     ];
 
-    public function user()
+    public function kategori()
     {
-        return $this->belongsTo(Users::class);
+        return $this->belongsTo(Kategori::class);
+    }
+
+    public function keranjang()
+    {
+        return $this->hasMany(Keranjang::class);
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use App\Models\Produk;
+use App\Models\Kategori;
 
 class ProdukController extends Controller
 {
@@ -17,8 +18,9 @@ class ProdukController extends Controller
      */
     public function index()
     {
+        $dtKategori = kategori::all();
         $dtProduk = Produk::paginate(5);
-        return view('admin.produk.produk', compact('dtProduk'));
+        return view('admin.produk.produk', compact('dtProduk','dtKategori'));
     }
 
     /**
@@ -28,7 +30,8 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        return view('admin.produk.tambah-produk');
+        $dtKategori = kategori::all();
+        return view('admin.produk.tambah-produk', compact('dtKategori'));
     }
 
     /**
@@ -40,6 +43,7 @@ class ProdukController extends Controller
     public function store(Request $request)
     {
         $dtProduk = new Produk;
+        $dtProduk->kategori_id = $request->kategori_id;
         $dtProduk->kd_produk = $request->kd_produk;
         $dtProduk->nama_produk = $request->nama_produk;
         $dtProduk->harga = $request->harga;
@@ -75,8 +79,9 @@ class ProdukController extends Controller
      */
     public function edit($id)
     {
+        $dtKategori = kategori::all();
         $dtProduk = Produk::findorfail($id);
-        return view('admin.produk.edit-produk', compact('dtProduk'));
+        return view('admin.produk.edit-produk', compact('dtProduk','dtKategori'));
     }
 
     /**
@@ -89,12 +94,18 @@ class ProdukController extends Controller
     public function update(Request $request, $id)
     {
         $dtProduk = Produk::findorfail($id);
+        $dtProduk->kategori_id = $request->kategori_id;
         $dtProduk->kd_produk = $request->kd_produk;
         $dtProduk->nama_produk = $request->nama_produk;
         $dtProduk->harga = $request->harga;
         $dtProduk->deskripsi = $request->deskripsi;
         if($request->hasfile('gambar'))
         {
+            $destination = 'images/produk/'.$dtProduk->gambar;
+            if(File::exists($destination))
+            {
+                File::delete($destination);
+            }
             $file = $request->file('gambar');
             $extention = $file->getClientOriginalExtension();
             $filename = time().'.'.$extention;

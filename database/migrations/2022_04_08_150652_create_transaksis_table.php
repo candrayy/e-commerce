@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->integer('ongkir');
             $table->integer('total');
-            $table->string('status');
+            $table->string('status')->nullable();
             $table->string('resi');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

@@ -10,15 +10,16 @@
     <meta name="author" content="">
 
     <title>Admin - Produk</title>
+    <link rel="icon" href="{{ asset('assets/images/shops.png') }}" type="image/png">
 
     <!-- Custom fonts for this template-->
-    <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
 </head>
 
@@ -227,7 +228,16 @@
                                 <label for="gambar" class="form-label">Pilih Gambar</label>
                                 <input type="file" id="gambar" name="gambar" class="form-control" style="height: 45px" required>
                             </div>
-                            <img src="{{ asset('images/produk'.$dtProduk->gambar ) }}" width="95px" height="80px" alt="img">
+                            <img src="{{ asset('images/produk/'.$dtProduk->gambar ) }}" width="95px" height="80px" alt="img">
+                            <div class="form-group mt-3">
+                                <label for="kategori_id" class="form-label">Kategori</label>
+                                <select class="form-control" name="kategori_id" id="kategori_id">
+                                <option value="{{ $dtProduk->kategori_id }}" required>{{ $dtProduk->kategori->nama_kategori }}</option>
+                                @foreach ($dtKategori as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
+                                @endforeach
+                                </select>
+                            </div>
                             <div class="form-group">
                                 <label for="kd_produk" class="form-label">Kode Produk</label>
                                 <input type="text" id="kd_produk" name="kd_produk" value="{{ $dtProduk->kd_produk }}" class="form-control" placeholder="Masukan Kode Produk" required>
