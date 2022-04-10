@@ -82,7 +82,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('kategori') }}">
                     <i class="fas fa-fw fa-book"></i>
                     <span>Kategori</span>
                 </a>
@@ -174,7 +174,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <img class="img-profile rounded-circle"
-                                    src="assets/img/undraw_profile.svg">
+                                    src="{{ asset('assets/img/undraw_profile.svg') }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -232,10 +232,10 @@
                             <div class="form-group mt-3">
                                 <label for="kategori_id" class="form-label">Kategori</label>
                                 <select class="form-control" name="kategori_id" id="kategori_id">
-                                <option value="{{ $dtProduk->kategori_id }}" required>{{ $dtProduk->kategori->nama_kategori }}</option>
-                                @foreach ($dtKategori as $item)
+                                    <option value="{{ $dtProduk->kategori_id }}">{{ $dtProduk->kategori->nama_kategori }}</option>
+                                    @foreach($dtKategori as $item)
                                     <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
-                                @endforeach
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
@@ -329,6 +329,11 @@
     <!-- Page level custom scripts -->
     <script src="assets/js/demo/chart-area-demo.js"></script>
     <script src="assets/js/demo/chart-pie-demo.js"></script>
+
+    <script src="//cdn.ckeditor.com/4.18.0/full/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'deskripsi' );
+    </script>
 
 </body>
 

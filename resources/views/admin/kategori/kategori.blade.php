@@ -238,8 +238,8 @@
                                         <td>{{ $item->kd_kategori }}</td>
                                         <td>{{ $item->nama_kategori }}</td>
                                         <td>
-                                            <a href="#" class="btn btn-success btn-icon btn-sm" type="button"><span>Ubah</span></a>
-                                            <a href="#" class="btn btn-danger btn-icon btn-sm" type="button"><span>Hapus</span></a>
+                                            <a href="{{ route('edit-kategori', $item->id) }}" class="btn btn-success btn-icon btn-sm" type="button"><span>Ubah</span></a>
+                                            <a href="{{ route('hapus-kategori', $item->id) }}" class="btn btn-danger btn-icon btn-sm" type="button"><span>Hapus</span></a>
                                         </td>
                                     </tr>
                                     @endforeach

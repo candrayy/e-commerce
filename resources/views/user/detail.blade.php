@@ -9,17 +9,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin - Produk</title>
-    <link rel="icon" href="assets/images/shops.png">
+    <title>Detail - {{ $detail->nama_produk }}</title>
 
     <!-- Custom fonts for this template-->
-    <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
 </head>
 
@@ -36,17 +35,17 @@
                 <div class="sidebar-brand-icon">
                     <i class="fas fa-store rotate-n-15"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Admin E-Commerce</div>
+                <div class="sidebar-brand-text mx-3">E-Commerce</div>
             </a>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
+            <!-- Nav Item - Beranda -->
             <li class="nav-item active">
-                <a class="nav-link" href="{{ route('admin') }}">
+                <a class="nav-link" href="{{ route('beranda') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Beranda</span></a>
             </li>
 
             <!-- Divider -->
@@ -75,16 +74,9 @@
 
             <!-- Nav Item - katalog Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('produk') }}">
-                    <i class="fas fa-fw fa-desktop"></i>
-                    <span>Produk</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('kategori') }}">
-                    <i class="fas fa-fw fa-book"></i>
-                    <span>Kategori</span>
+                <a class="nav-link" href="#">
+                    <i class="fas fa-fw fa-cart-plus"></i>
+                    <span>Keranjang</span>
                 </a>
             </li>
 
@@ -99,13 +91,33 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Kategori
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-fw fa-blender"></i>
+                    <span>Elektronik</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-fw fa-socks"></i>
+                    <span>Pakaian</span>
+                </a>
+            </li>
+
             <!-- Divider -->
-            <!-- <hr class="sidebar-divider d-none d-md-block"> -->
+            <hr class="sidebar-divider">
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
+
 
         </ul>
         <!-- End of Sidebar -->
@@ -174,7 +186,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <img class="img-profile rounded-circle"
-                                    src="assets/img/undraw_profile.svg">
+                                    src="{{ asset('assets/img/undraw_profile.svg') }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -209,60 +221,26 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Produk</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        <h1 class="h3 mb-0 text-gray-800">Detail Produk</h1>
                     </div>
 
-                    <!-- Content Row -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <a href="{{ route('tambah-produk') }}" class="btn btn-primary btn-icon-split" type="button">
-                                <span class="text">Tambah Data</span>
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Gambar</th>
-                                        <th scope="col">Kategori</th>
-                                        <th scope="col">Kode Produk</th>
-                                        <th scope="col">Nama Produk</th>
-                                        <th scope="col">Harga</th>
-                                        <th scope="col">Deskpripsi</th>
-                                        <th scope="col">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($dtProduk as $item)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>
-                                            <img src="{{ asset('images/produk/'.$item->gambar) }}" width="150px" height="100px" alt="image">
-                                        </td>
-                                        <td>{{ $item->kategori->nama_kategori }}</td>
-                                        <td>{{ $item->kd_produk }}</td>
-                                        <td>{{ $item->nama_produk }}</td>
-                                        <td>Rp {{ $item->harga }}</td>
-                                        <td>{!! Str::limit($item->deskripsi, 10) !!}</td>
-                                        <td>
-                                            <a href="{{ route('edit-produk', $item->id) }}" class="btn btn-success btn-icon btn-sm" type="button"><span>Ubah</span></a>
-                                            <a href="{{ route('hapus-produk', $item->id) }}" class="btn btn-danger btn-icon btn-sm" type="button"><span>Hapus</span></a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            {{ $dtProduk->links() }}
-                        </div>
+
+                    <!-- Kategori Card Example -->
+                    <div class="card shadow-sm p-3 bg-body rounded" style="width: 18rem;">
+                    <img class="card-img-top" src="{{ asset('images/produk/'. $detail->gambar ) }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">{{ $detail->nama_produk }}</h5>
+                        <p class="fs-5">Rp {{ $detail->harga }}</p>
+                        <p class="card-text">{!! $detail->deskripsi !!}</p>
                     </div>
-
-                    <!-- Content Row -->
-
-                    <div class="row">
- 
+                    <div class="card-footer bg-white">
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-cart-plus"></i>
+                        </a>
+                        <a href="#" class="btn btn-success px-3">
+                            <i class="fas fa-dollar-sign"></i>
+                        </a>
+                    </div>
                     </div>
 
                 </div>
@@ -313,21 +291,21 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="assets/vendor/jquery/jquery.min.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="{{ asset('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="assets/js/sb-admin-2.min.js"></script>
+    <script src="{{ asset('assets/js/sb-admin-2.min.js') }}"></script>
 
     <!-- Page level plugins -->
-    <script src="assets/vendor/chart.js/Chart.min.js"></script>
+    <script src="{{ asset('assets/vendor/chart.js/Chart.min.js') }}"></script>
 
     <!-- Page level custom scripts -->
-    <script src="assets/js/demo/chart-area-demo.js"></script>
-    <script src="assets/js/demo/chart-pie-demo.js"></script>
+    <script src="{{ asset('assets/js/demo/chart-area-demo.js') }}"></script>
+    <script src="{{ asset('assets/js/demo/chart-pie-demo.js') }}"></script>
 
 </body>
 

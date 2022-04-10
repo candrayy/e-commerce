@@ -18,9 +18,8 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        $dtKategori = kategori::all();
         $dtProduk = Produk::paginate(5);
-        return view('admin.produk.produk', compact('dtProduk','dtKategori'));
+        return view('admin.produk.produk', compact('dtProduk'));
     }
 
     /**
@@ -46,6 +45,7 @@ class ProdukController extends Controller
         $dtProduk->kategori_id = $request->kategori_id;
         $dtProduk->kd_produk = $request->kd_produk;
         $dtProduk->nama_produk = $request->nama_produk;
+        $dtProduk->slug = Str::slug($request->get('nama_produk'));
         $dtProduk->harga = $request->harga;
         $dtProduk->deskripsi = $request->deskripsi;
         if($request->hasfile('gambar'))

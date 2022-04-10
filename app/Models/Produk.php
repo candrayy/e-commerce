@@ -13,7 +13,8 @@ class Produk extends Model
     protected $primaryKey = 'id';
     public $timestamp = false;
     protected $fillable = [
-        'kategori_id', 'gambar', 'kd_produk', 'nama_produk', 'harga', 'stok', 'deskripsi',
+        'kategori_id', 'gambar', 'kd_produk', 'nama_produk',
+        'harga', 'stok', 'deskripsi', 'slug',
     ];
 
     public function kategori()

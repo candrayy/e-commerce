@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\kategori;
+use Illuminate\Support\Str;
+use App\Models\Produk;
+use App\Models\Kategori;
+use App\Models\Keranjang;
+use App\Models\Transaksi;
 
-class KategoriController extends Controller
+class BerandaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +18,9 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        $dtKategori = Kategori::paginate(5);
-        return view('admin.kategori.kategori', compact('dtKategori'));
+        $dtProduk = Produk::get()->all();
+        $dtKategori = Kategori::get()->all();
+        return view('user.beranda', compact('dtProduk','dtKategori'));
     }
 
     /**
@@ -25,7 +30,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        return view('admin.kategori.tambah-kategori');
+        //
     }
 
     /**
@@ -36,11 +41,7 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        Kategori::create([
-            'kd_kategori' => $request->kd_kategori,
-            'nama_kategori' => $request->nama_kategori,
-        ]);
-        return redirect('kategori');
+        //
     }
 
     /**
@@ -62,8 +63,7 @@ class KategoriController extends Controller
      */
     public function edit($id)
     {
-        $dtKategori = Kategori::findorfail($id);
-        return view('admin.kategori.edit-kategori', compact('dtKategori'));
+        //
     }
 
     /**
@@ -75,12 +75,7 @@ class KategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $dtKategori = Kategori::findorfail($id);
-        $dtKategori->update([
-            'kd_kategori' => $request->kd_kategori,
-            'nama_kategori' => $request->nama_kategori,
-        ]);
-        return redirect('kategori');
+        //
     }
 
     /**
@@ -91,8 +86,12 @@ class KategoriController extends Controller
      */
     public function destroy($id)
     {
-        $dtKategori = Kategori::findorfail($id);
-        $dtKategori->delete();
-        return redirect('kategori');
+        //
+    }
+
+    public function detail($slug)
+    {
+        $detail = Produk::where('slug', $slug)->first();
+        return view('user.detail', compact('detail'));
     }
 }

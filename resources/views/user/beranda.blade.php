@@ -9,8 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin - Produk</title>
-    <link rel="icon" href="assets/images/shops.png">
+    <title>E - Commerce</title>
 
     <!-- Custom fonts for this template-->
     <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -36,17 +35,17 @@
                 <div class="sidebar-brand-icon">
                     <i class="fas fa-store rotate-n-15"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Admin E-Commerce</div>
+                <div class="sidebar-brand-text mx-3">E-Commerce</div>
             </a>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
+            <!-- Nav Item - Beranda -->
             <li class="nav-item active">
-                <a class="nav-link" href="{{ route('admin') }}">
+                <a class="nav-link" href="{{ route('beranda') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Beranda</span></a>
             </li>
 
             <!-- Divider -->
@@ -75,16 +74,9 @@
 
             <!-- Nav Item - katalog Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('produk') }}">
-                    <i class="fas fa-fw fa-desktop"></i>
-                    <span>Produk</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('kategori') }}">
-                    <i class="fas fa-fw fa-book"></i>
-                    <span>Kategori</span>
+                <a class="nav-link" href="#">
+                    <i class="fas fa-fw fa-cart-plus"></i>
+                    <span>Keranjang</span>
                 </a>
             </li>
 
@@ -99,13 +91,33 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Kategori
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-fw fa-blender"></i>
+                    <span>Elektronik</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-fw fa-socks"></i>
+                    <span>Pakaian</span>
+                </a>
+            </li>
+
             <!-- Divider -->
-            <!-- <hr class="sidebar-divider d-none d-md-block"> -->
+            <hr class="sidebar-divider">
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
+
 
         </ul>
         <!-- End of Sidebar -->
@@ -209,60 +221,34 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Produk</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        <h1 class="h3 mb-0 text-gray-800">Pilihan Untukmu</h1>
                     </div>
 
-                    <!-- Content Row -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <a href="{{ route('tambah-produk') }}" class="btn btn-primary btn-icon-split" type="button">
-                                <span class="text">Tambah Data</span>
+
+                    <!-- Kategori Card Example -->
+                    <div class="row">
+                    @foreach ($dtProduk as $item)
+                    <div class="col-sm-6">
+                        <div class="card mt-3 shadow-sm p-3 bg-body rounded">
+                        <img src="{{ asset('images/produk/'.$item->gambar ) }}" class="card-img-top" width="500" height="500" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">
+                                <a href="{{ url('detail', $item->slug) }}">{{ $item->nama_produk }}</a>
+                            </h5>
+                            <p class="fs-5">Rp {{ $item->harga }}</p>
+                            <p class="card-text">{!! Str::limit($item->deskripsi, 20) !!}</p>
+                        </div>
+                        <div class="card-footer bg-white">
+                            <a href="#" class="btn btn-primary">
+                                <i class="fas fa-cart-plus"></i>
+                            </a>
+                            <a href="#" class="btn btn-success px-3">
+                                <i class="fas fa-dollar-sign"></i>
                             </a>
                         </div>
-                        <div class="card-body">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Gambar</th>
-                                        <th scope="col">Kategori</th>
-                                        <th scope="col">Kode Produk</th>
-                                        <th scope="col">Nama Produk</th>
-                                        <th scope="col">Harga</th>
-                                        <th scope="col">Deskpripsi</th>
-                                        <th scope="col">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($dtProduk as $item)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>
-                                            <img src="{{ asset('images/produk/'.$item->gambar) }}" width="150px" height="100px" alt="image">
-                                        </td>
-                                        <td>{{ $item->kategori->nama_kategori }}</td>
-                                        <td>{{ $item->kd_produk }}</td>
-                                        <td>{{ $item->nama_produk }}</td>
-                                        <td>Rp {{ $item->harga }}</td>
-                                        <td>{!! Str::limit($item->deskripsi, 10) !!}</td>
-                                        <td>
-                                            <a href="{{ route('edit-produk', $item->id) }}" class="btn btn-success btn-icon btn-sm" type="button"><span>Ubah</span></a>
-                                            <a href="{{ route('hapus-produk', $item->id) }}" class="btn btn-danger btn-icon btn-sm" type="button"><span>Hapus</span></a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            {{ $dtProduk->links() }}
                         </div>
                     </div>
-
-                    <!-- Content Row -->
-
-                    <div class="row">
- 
+                    @endforeach
                     </div>
 
                 </div>

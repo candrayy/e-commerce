@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('kd_produk');
             $table->string('nama_produk');
             $table->string('harga');
-            $table->string('deskripsi');
+            $table->text('deskripsi');
+            $table->string('slug');
             $table->foreign('kategori_id')->references('id')->on('kategoris')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
