@@ -9,8 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin - Kategori</title>
-    <link rel="icon" href="assets/images/shops.png">
+    <title>Admin - User Admin</title>
 
     <!-- Custom fonts for this template-->
     <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -105,7 +104,7 @@
             </div>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('akun') }}">
                     <i class="fas fa-fw fa-user"></i>
                     <span>User Admin</span>
                 </a>
@@ -153,7 +152,7 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <!-- Nav Item - Search Dropdown (Vdeskripsible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -221,7 +220,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Kategori</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Tambah User Admin</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
@@ -229,35 +228,38 @@
                     <!-- Content Row -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <a href="{{ route('tambah-kategori') }}" class="btn btn-primary btn-icon-split" type="button">
-                                <span class="text">Tambah Data</span>
-                            </a>
+                            <h6 class="m-0 font-weight-bold text-primary">
+                                Tambah Data User Admin
+                            </h6>
                         </div>
                         <div class="card-body">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Kode Kategori</th>
-                                        <th scope="col">Nama Kategori</th>
-                                        <th scope="col">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($dtUser as $item)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->kd_kategori }}</td>
-                                        <td>{{ $item->nama_kategori }}</td>
-                                        <td>
-                                            <a href="{{ route('edit-kategori', $item->id) }}" class="btn btn-success btn-icon btn-sm" type="button"><span>Ubah</span></a>
-                                            <a href="{{ route('hapus-kategori', $item->id) }}" class="btn btn-danger btn-icon btn-sm" type="button"><span>Hapus</span></a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            {{ $dtKategori->links() }}
+                        <form action="{{ route('simpan-akun') }}" method="post" enctype="multipart/form-data">
+                            {{ csrf_field()}}
+                            <div class="form-group">
+                                <label for="name" class="form-label">Nama</label>
+                                <input type="text" id="name" name="name" class="form-control" placeholder="Masukan Nama User" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="text" id="email" name="email" class="form-control" placeholder="Masukan Email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Masukan Password" required>
+                                <input type="checkbox" id="checkbox" class="mt-2"> Show Password
+                            </div>
+                            <div class="form-group">
+                                <label for="no_hp" class="form-label">No HP</label>
+                                <input type="number" id="no_hp" min="0" name="no_hp" class="form-control" placeholder="Masukan No HP" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="role" class="form-label">Role</label>
+                                <input type="text" id="role" name="role" class="form-control" placeholder="Masukan Role Akun" required>
+                                <label>*Note : usr = user, adm = admin</label>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success btn-submit">Simpan</button>
+                            </div>
                         </div>
                     </div>
 
@@ -330,6 +332,14 @@
     <!-- Page level custom scripts -->
     <script src="assets/js/demo/chart-area-demo.js"></script>
     <script src="assets/js/demo/chart-pie-demo.js"></script>
+
+    <script>
+    $(document).ready(function(){
+        $('#checkbox').on('change', function(){
+            $('#password').attr('type',$('#checkbox').prop('checked')==true?"text":"password"); 
+        });
+    });
+    </script>
 
 </body>
 

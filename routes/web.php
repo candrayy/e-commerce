@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AkunController;
 use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\KategoriController;
@@ -39,6 +40,11 @@ Route::post('/simpan-kategori', [KategoriController::class, 'store'])->name('sim
 Route::get('/edit-kategori/{id}', [KategoriController::class, 'edit'])->name('edit-kategori');
 Route::post('/ubah-kategori/{id}', [KategoriController::class, 'update'])->name('ubah-kategori');
 Route::get('/hapus-kategori/{id}', [KategoriController::class, 'destroy'])->name('hapus-kategori');
+
+// User Admin
+Route::get('/akun', [AkunController::class, 'index'])->name('akun');
+Route::get('/tambah-akun', [AkunController::class, 'create'])->name('tambah-akun');
+Route::post('/simpan-akun', [AkunController::class, 'store'])->name('simpan-akun');
 
 
 

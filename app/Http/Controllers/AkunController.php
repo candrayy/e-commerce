@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Models\kategori;
+use App\Models\User;
 
-class KategoriController extends Controller
+class AkunController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        $dtKategori = Kategori::paginate(5);
-        return view('admin.kategori.kategori', compact('dtKategori'));
+        $dtAkun = User::paginate(5);
+        return view('admin.akun.akun', compact('dtAkun'));
     }
 
     /**
@@ -26,7 +26,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        return view('admin.kategori.tambah-kategori');
+        return view('admin.akun.tambah-akun');
     }
 
     /**
@@ -37,11 +37,14 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        Kategori::create([
-            'kd_kategori' => $request->kd_kategori,
-            'nama_kategori' => $request->nama_kategori,
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'no_hp' => $request->no_hp,
+            'role' => $request->role,
         ]);
-        return redirect('kategori');
+        return redirect('akun');
     }
 
     /**
@@ -63,8 +66,7 @@ class KategoriController extends Controller
      */
     public function edit($id)
     {
-        $dtKategori = Kategori::findorfail($id);
-        return view('admin.kategori.edit-kategori', compact('dtKategori'));
+        //
     }
 
     /**
@@ -76,12 +78,7 @@ class KategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $dtKategori = Kategori::findorfail($id);
-        $dtKategori->update([
-            'kd_kategori' => $request->kd_kategori,
-            'nama_kategori' => $request->nama_kategori,
-        ]);
-        return redirect('kategori');
+        //
     }
 
     /**
@@ -92,8 +89,6 @@ class KategoriController extends Controller
      */
     public function destroy($id)
     {
-        $dtKategori = Kategori::findorfail($id);
-        $dtKategori->delete();
-        return redirect('kategori');
+        //
     }
 }

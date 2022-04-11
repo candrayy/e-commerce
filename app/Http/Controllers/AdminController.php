@@ -7,6 +7,7 @@ use App\Models\Kategori;
 use App\Models\Produk;
 use App\Models\Keranjang;
 use App\Models\Transaksi;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -19,9 +20,9 @@ class AdminController extends Controller
     {
         $kategori = Kategori::get()->count();
         $produk = Produk::get()->count();
-        $keranjang = Keranjang::get()->count();
+        $user = User::get()->count();
         $transaksi = Transaksi::get()->count();
-        return view('admin.admin', compact('kategori', 'produk', 'keranjang', 'transaksi'));
+        return view('admin.admin', compact('kategori', 'produk', 'user', 'transaksi'));
     }
 
     /**

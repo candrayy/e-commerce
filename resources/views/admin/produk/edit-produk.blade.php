@@ -54,7 +54,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Daftar Menu
+                Produk & Transaksi
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -99,8 +99,20 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Akun
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>User Admin</span>
+                </a>
+            </li>
+
             <!-- Divider -->
-            <!-- <hr class="sidebar-divider d-none d-md-block"> -->
+            <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">

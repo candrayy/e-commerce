@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin - Kategori</title>
+    <title>Admin - User Admin</title>
     <link rel="icon" href="assets/images/shops.png">
 
     <!-- Custom fonts for this template-->
@@ -105,7 +105,7 @@
             </div>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('akun') }}">
                     <i class="fas fa-fw fa-user"></i>
                     <span>User Admin</span>
                 </a>
@@ -221,7 +221,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Kategori</h1>
+                        <h1 class="h3 mb-0 text-gray-800">User Admin</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
@@ -229,7 +229,7 @@
                     <!-- Content Row -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <a href="{{ route('tambah-kategori') }}" class="btn btn-primary btn-icon-split" type="button">
+                            <a href="{{ route('tambah-akun') }}" class="btn btn-primary btn-icon-split" type="button">
                                 <span class="text">Tambah Data</span>
                             </a>
                         </div>
@@ -238,26 +238,32 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">No</th>
-                                        <th scope="col">Kode Kategori</th>
-                                        <th scope="col">Nama Kategori</th>
+                                        <th scope="col">Nama</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Password</th>
+                                        <th scope="col">No HP</th>
+                                        <th scope="col">Role</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($dtUser as $item)
+                                    @foreach ($dtAkun as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->kd_kategori }}</td>
-                                        <td>{{ $item->nama_kategori }}</td>
+                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->email }}</td>
+                                        <td>{!! Str::limit($item->password, 10) !!}</td>
+                                        <td>{{ $item->no_hp }}</td>
+                                        <td>{{ $item->role }}</td>
                                         <td>
-                                            <a href="{{ route('edit-kategori', $item->id) }}" class="btn btn-success btn-icon btn-sm" type="button"><span>Ubah</span></a>
-                                            <a href="{{ route('hapus-kategori', $item->id) }}" class="btn btn-danger btn-icon btn-sm" type="button"><span>Hapus</span></a>
+                                            <a href="#" class="btn btn-success btn-icon btn-sm" type="button"><span>Ubah</span></a>
+                                            <a href="#" class="btn btn-danger btn-icon btn-sm" type="button"><span>Hapus</span></a>
                                         </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $dtKategori->links() }}
+                            {{ $dtAkun->links() }}
                         </div>
                     </div>
 

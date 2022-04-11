@@ -53,7 +53,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Daftar Menu
+                Produk & Transaksi
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -98,8 +98,20 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Akun
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('akun') }}">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>User Admin</span>
+                </a>
+            </li>
+
             <!-- Divider -->
-            <!-- <hr class="sidebar-divider d-none d-md-block"> -->
+            <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
@@ -258,16 +270,16 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Keranjang
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Admin
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$keranjang}}</div>
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$user}}</div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-cart-arrow-down fa-2x text-gray-300"></i>
+                                            <i class="fas fa-user fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>

@@ -19,12 +19,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('alamat');
-            $table->string('provinsi');
-            $table->string('kota');
-            $table->string('kode_pos');
-            $table->string('no_hp');
-            $table->string('role');
+            $table->string('alamat')->nullable();
+            $table->string('provinsi')->nullable();
+            $table->string('kota')->nullable();
+            $table->string('kode_pos')->nullable();
+            $table->bigInteger('no_hp');
+            $table->string('role')->default('usr')->comment('usr = user, adm = admin');
             $table->rememberToken();
             $table->timestamps();
         });
