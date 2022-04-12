@@ -241,12 +241,12 @@
                             </div>
                             <div class="form-group">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="text" id="email" name="email" class="form-control" placeholder="Masukan Email" required>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="Masukan Email" required>
                             </div>
                             <div class="form-group">
                                 <label for="password" class="form-label">Password</label>
                                 <input type="password" id="password" name="password" class="form-control" placeholder="Masukan Password" required>
-                                <input type="checkbox" id="checkbox" class="mt-2"> Show Password
+                                <input type="checkbox" id="checkbox" class="mt-2"> Tampilkan Password
                             </div>
                             <div class="form-group">
                                 <label for="no_hp" class="form-label">No HP</label>

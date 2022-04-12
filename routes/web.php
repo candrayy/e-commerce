@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\ProdukController;
@@ -51,3 +52,9 @@ Route::post('/simpan-akun', [AkunController::class, 'store'])->name('simpan-akun
 // Beranda User
 Route::get('/beranda', [BerandaController::class, 'index'])->name('beranda');
 Route::get('/detail/{slug}', [BerandaController::class, 'detail']);
+
+
+// Login
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/postlogin', [LoginController::class, 'postlogin'])->name('postlogin');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
