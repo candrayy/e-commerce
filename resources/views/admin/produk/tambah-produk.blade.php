@@ -104,7 +104,7 @@
             </div>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('akun') }}">
                     <i class="fas fa-fw fa-user"></i>
                     <span>User Admin</span>
                 </a>

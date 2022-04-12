@@ -83,6 +83,18 @@ class LoginController extends Controller
         //
     }
 
+    protected function authenticated()
+    {
+        if(Auth::user()->role == 'adm')
+        {
+            return redirect('admin');
+        }
+        elseif(Auth::user()->role == 'usr')
+        {
+            return redirect('beranda');
+        }
+    }
+
     public function postlogin(request $request)
     {
         if (Auth::attempt($request->only('name', 'password'))) {
@@ -90,6 +102,7 @@ class LoginController extends Controller
         } else {
             return redirect('login');
         }
+
     }
 
     public function logout()
