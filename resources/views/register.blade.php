@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Login</title>
+    <title>Register</title>
 
     <!-- Custom fonts for this template-->
     <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -37,14 +37,22 @@
                         <div class="card">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Selamat Datang!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Masukan Data Diri Anda</h1>
                                     </div>
-                                    <form action="{{ route('postlogin') }}" class="login-form" method="post">
+                                    <form action="{{ route('postregister') }}" class="login-form" method="post" enctype="multipart/form-data">
 							        {{ csrf_field() }}
                                     <form class="user">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
                                                 id="name" name="name" placeholder="Masukkan Nama">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" class="form-control form-control-user"
+                                                id="email" name="email" placeholder="Masukkan Email">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="number" min="0" class="form-control form-control-user"
+                                                id="no_hp" name="no_hp" placeholder="Masukkan Nomor HP">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
@@ -53,16 +61,25 @@
                                             Tampilkan Password
                                         </div>
                                         <div class="form-group">
-                                            <button class="btn btn-primary btn-user btn-block" type="submit">
-                                                Login
-                                            </button>
+                                            <input type="text" class="form-control form-control-user"
+                                                id="alamat" name="alamat" placeholder="Masukkan Alamat">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-user"
+                                                id="provinsi" name="provinsi" placeholder="Masukkan Provinsi">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-user"
+                                                id="kota" name="kota" placeholder="Masukkan Kota">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-user"
+                                                id="kode_pos" name="kode_pos" placeholder="Masukkan Kode Pos">
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-success btn-submit">Register</button>
                                         </div>
                                         <hr>
-                                        <div class="form-group">
-                                            <a href="{{ route('register') }}" class="btn btn-success btn-user btn-block" type="button">
-                                                Register
-                                            </a>
-                                        </div>
                                 </div>
                         </div>
                     </div>

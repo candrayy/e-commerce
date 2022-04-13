@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Middleware\Auth;
 use Illuminate\Support\Str;
+use App\Models\User;
 use App\Models\Produk;
 use App\Models\Kategori;
 use App\Models\Keranjang;
@@ -19,9 +20,10 @@ class BerandaController extends Controller
      */
     public function index()
     {
+        $user = User::get()->all();
         $dtProduk = Produk::get()->all();
         $dtKategori = Kategori::get()->all();
-        return view('user.beranda', compact('dtProduk','dtKategori'));
+        return view('user.beranda', compact('dtProduk','dtKategori', 'user'));
     }
 
     /**

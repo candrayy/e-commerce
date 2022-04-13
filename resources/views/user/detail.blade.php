@@ -235,7 +235,7 @@
                     </div>
                     <div class="card-footer bg-white">
                         <a href="#" class="btn btn-primary">
-                            <i class="fas fa-cart-plus"></i>
+                            <i class="fas fa-heart"></i>
                         </a>
                         <a href="#" class="btn btn-success px-3">
                             <i class="fas fa-dollar-sign"></i>

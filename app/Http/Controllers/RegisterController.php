@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
 use Illuminate\Http\Request;
+use App\Models\User;
 
-class LoginController extends Controller
+class RegisterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class LoginController extends Controller
      */
     public function index()
     {
-        return view('login');
+        return view('register');
     }
 
     /**
@@ -35,7 +35,17 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'no_hp' => $request->no_hp,
+            'alamat' => $request->alamat,
+            'provinsi' => $request->provinsi,
+            'kota' => $request->kota,
+            'kode_pos' => $request->kode_pos,
+        ]);
+        return redirect('login');
     }
 
     /**
@@ -81,34 +91,5 @@ class LoginController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    protected function authenticated()
-    {
-        if(Auth::user()->role == 'adm')
-        {
-            return redirect('admin');
-        }
-        elseif(Auth::user()->role == 'usr')
-        {
-            return redirect('beranda');
-        }
-    }
-
-    public function postlogin(request $request)
-    {
-        if (Auth::attempt($request->only('name', 'password'))) {
-            return redirect('admin');
-        }
-        else {
-            return back();
-        }
-
-    }
-
-    public function logout()
-    {
-        Auth::logout();
-        return redirect('login');
     }
 }
