@@ -3,15 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Middleware\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Produk;
-use App\Models\Kategori;
 use App\Models\Keranjang;
-use App\Models\Transaksi;
 
-class BerandaController extends Controller
+class KeranjangController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,9 +18,8 @@ class BerandaController extends Controller
      */
     public function index()
     {
-        $user = User::get()->all();
-        $dtProduk = Produk::orderBy('id', 'desc')->paginate(5);
-        return view('user.beranda', compact('dtProduk', 'user'));
+        $dtKeranjang = Keranjang::where('user_id', Auth::id())->paginate(5);
+        return view('user.keranjang.keranjang', compact('dtKeranjang'));
     }
 
     /**
@@ -41,9 +38,32 @@ class BerandaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function keranjangadd(Request $request, $id)
     {
-        //
+        // if(Auth::id())
+        // {
+            // $user = Auth::user();
+            // $produk = Produk::firstOrFail();
+        //     $keranjang = new Keranjang;
+        //     $keranjang->user = $user->name;
+        //     $keranjang->no_hp = $user->no_hp;
+        //     $keranjang->nama_produk = $produk->nama_produk;
+        //     $keranjang->harga = $produk->harga;
+        //     // dd($keranjang);
+        //     $keranjang->save();
+        //     return redirect('keranjang');
+        // }
+        // else
+        // {
+        //     return redirect()->back();
+        // }
+        $data = [
+            'produk_id' => $id,
+            'user_id' => Auth::user()->id,
+        ];
+        Keranjang::create($data);
+        // dd($data);
+        return redirect('keranjang');
     }
 
     /**
@@ -88,12 +108,8 @@ class BerandaController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
-
-    public function detail($slug)
-    {
-        $detail = Produk::where('slug', $slug)->first();
-        return view('user.detail', compact('detail'));
+        $dtKeranjang = Keranjang::find($id);
+        $dtKeranjang->delete();
+        return redirect()->back();
     }
 }

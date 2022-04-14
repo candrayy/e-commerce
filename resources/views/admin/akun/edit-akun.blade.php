@@ -10,16 +10,15 @@
     <meta name="author" content="">
 
     <title>Admin - User Admin</title>
-    <link rel="icon" href="assets/images/shops.png">
 
     <!-- Custom fonts for this template-->
-    <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
 </head>
 
@@ -153,7 +152,7 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <!-- Nav Item - Search Dropdown (Vdeskripsible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -186,7 +185,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
                                 <img class="img-profile rounded-circle"
-                                    src="assets/img/undraw_profile.svg">
+                                    src="{{ asset('assets/img/undraw_profile.svg') }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -221,7 +220,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">User Admin</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Ubah User Admin</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
@@ -229,41 +228,38 @@
                     <!-- Content Row -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <a href="{{ route('tambah-akun') }}" class="btn btn-primary btn-icon-split" type="button">
-                                <span class="text">Tambah Data</span>
-                            </a>
+                            <h6 class="m-0 font-weight-bold text-primary">
+                                Ubah Data User Admin
+                            </h6>
                         </div>
                         <div class="card-body">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Nama</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Password</th>
-                                        <th scope="col">No HP</th>
-                                        <th scope="col">Role</th>
-                                        <th scope="col">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($dtAkun as $item)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->name }}</td>
-                                        <td>{{ $item->email }}</td>
-                                        <td>{!! Str::limit($item->password, 10) !!}</td>
-                                        <td>{{ $item->no_hp }}</td>
-                                        <td>{{ $item->role }}</td>
-                                        <td>
-                                            <a href="{{ route('edit-akun', $item->id) }}" class="btn btn-success btn-icon btn-sm" type="button"><span>Ubah</span></a>
-                                            <a href="{{ route('hapus-akun', $item->id) }}" class="btn btn-danger btn-icon btn-sm" type="button"><span>Hapus</span></a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            {{ $dtAkun->links() }}
+                        <form action="{{ route('ubah-akun',$dtAkun->id) }}" method="post" enctype="multipart/form-data">
+                            {{ csrf_field()}}
+                            <div class="form-group">
+                                <label for="name" class="form-label">Nama</label>
+                                <input type="text" id="name" name="name" class="form-control" value="{{ $dtAkun->name }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" id="email" name="email" class="form-control" value="{{ $dtAkun->email }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" id="password" name="password" class="form-control" value="{{ $dtAkun->password }}" required>
+                                <input type="checkbox" id="checkbox" class="mt-2"> Tampilkan Password
+                            </div>
+                            <div class="form-group">
+                                <label for="no_hp" class="form-label">No HP</label>
+                                <input type="number" id="no_hp" min="0" name="no_hp" class="form-control" value="{{ $dtAkun->no_hp }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="role" class="form-label">Role</label>
+                                <input type="text" id="role" name="role" class="form-control" value="{{ $dtAkun->role }}" required>
+                                <label>*Note : usr = user, adm = admin</label>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success btn-submit">Simpan</button>
+                            </div>
                         </div>
                     </div>
 
@@ -321,21 +317,29 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="assets/vendor/jquery/jquery.min.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="{{ asset('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="assets/js/sb-admin-2.min.js"></script>
+    <script src="{{ asset('assets/js/sb-admin-2.min.js') }}"></script>
 
     <!-- Page level plugins -->
-    <script src="assets/vendor/chart.js/Chart.min.js"></script>
+    <script src="{{ asset('assets/vendor/chart.js/Chart.min.js') }}"></script>
 
     <!-- Page level custom scripts -->
-    <script src="assets/js/demo/chart-area-demo.js"></script>
-    <script src="assets/js/demo/chart-pie-demo.js"></script>
+    <script src="{{ asset('assets/js/demo/chart-area-demo.js') }}"></script>
+    <script src="{{ asset('assets/js/demo/chart-pie-demo.js') }}"></script>
+
+    <script>
+    $(document).ready(function(){
+        $('#checkbox').on('change', function(){
+            $('#password').attr('type',$('#checkbox').prop('checked')==true?"text":"password"); 
+        });
+    });
+    </script>
 
 </body>
 

@@ -66,7 +66,8 @@ class AkunController extends Controller
      */
     public function edit($id)
     {
-        //
+        $dtAkun = User::findorfail($id);
+        return view('admin.akun.edit-akun', compact('dtAkun'));
     }
 
     /**
@@ -78,7 +79,15 @@ class AkunController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $dtAkun = User::findorfail($id);
+        $dtAkun->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'no_hp' => $request->no_hp,
+            'role' => $request->role,
+        ]);
+        return redirect('akun');
     }
 
     /**
@@ -89,6 +98,8 @@ class AkunController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $dtAkun = User::findorfail($id);
+        $dtAkun->delete();
+        return redirect('akun');
     }
 }

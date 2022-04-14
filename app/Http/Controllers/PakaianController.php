@@ -5,13 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Middleware\Auth;
 use Illuminate\Support\Str;
-use App\Models\User;
 use App\Models\Produk;
 use App\Models\Kategori;
-use App\Models\Keranjang;
-use App\Models\Transaksi;
 
-class BerandaController extends Controller
+class PakaianController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,9 +17,9 @@ class BerandaController extends Controller
      */
     public function index()
     {
-        $user = User::get()->all();
-        $dtProduk = Produk::orderBy('id', 'desc')->paginate(5);
-        return view('user.beranda', compact('dtProduk', 'user'));
+        $dtKategori = Kategori::get();
+        $dtProduk = Produk::orderBy('id', 'desc')->where('kategori_id', 2)->paginate(5);
+        return view('user.kategori.elektronik', compact('dtProduk', 'dtKategori'));
     }
 
     /**
@@ -89,11 +86,5 @@ class BerandaController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function detail($slug)
-    {
-        $detail = Produk::where('slug', $slug)->first();
-        return view('user.detail', compact('detail'));
     }
 }

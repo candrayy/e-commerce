@@ -16,7 +16,13 @@ return new class extends Migration
         Schema::create('keranjangs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('produk_id');
+            $table->unsignedBigInteger('user_id');
             $table->foreign('produk_id')->references('id')->on('produks')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            // $table->string('user')->nullable();
+            // $table->string('no_hp')->nullable();
+            // $table->string('nama_produk')->nullable();
+            // $table->string('harga')->nullable();
             $table->timestamps();
         });
     }

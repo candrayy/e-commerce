@@ -74,8 +74,8 @@
 
             <!-- Nav Item - katalog Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-fw fa-cart-plus"></i>
+                <a class="nav-link" href="{{ route('keranjang') }}">
+                    <i class="fas fa-fw fa-cart-arrow-down"></i>
                     <span>Keranjang</span>
                 </a>
             </li>
@@ -97,14 +97,14 @@
             </div>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('elektronik') }}">
                     <i class="fas fa-fw fa-blender"></i>
                     <span>Elektronik</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('pakaian') }}">
                     <i class="fas fa-fw fa-socks"></i>
                     <span>Pakaian</span>
                 </a>
@@ -184,7 +184,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
                                 <img class="img-profile rounded-circle"
                                     src="{{ asset('assets/img/undraw_profile.svg') }}">
                             </a>
@@ -233,14 +233,13 @@
                         <p class="fs-5">Rp {{ $detail->harga }}</p>
                         <p class="card-text">{!! $detail->deskripsi !!}</p>
                     </div>
-                    <div class="card-footer bg-white">
-                        <a href="#" class="btn btn-primary">
-                            <i class="fas fa-heart"></i>
-                        </a>
-                        <a href="#" class="btn btn-success px-3">
-                            <i class="fas fa-dollar-sign"></i>
-                        </a>
-                    </div>
+                    <form action="{{ route('tambah-keranjang',$detail->id) }}" method="POST">
+                        {{ csrf_field()}}
+                        <div class="card-footer bg-white">
+                            <button type="submit" class="btn btn-success px-3">
+                                <i class="fas fa-cart-arrow-down"></i>
+                            </button>
+                        </div>
                     </div>
 
                 </div>

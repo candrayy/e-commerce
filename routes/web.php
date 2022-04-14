@@ -8,6 +8,9 @@ use App\Http\Controllers\AkunController;
 use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\KeranjangController;
+use App\Http\Controllers\ElektronikController;
+use App\Http\Controllers\PakaianController;
 
 
 /*
@@ -49,13 +52,30 @@ Route::middleware(['auth', 'cekRole'])->group(function () {
     Route::get('/akun', [AkunController::class, 'index'])->name('akun');
     Route::get('/tambah-akun', [AkunController::class, 'create'])->name('tambah-akun');
     Route::post('/simpan-akun', [AkunController::class, 'store'])->name('simpan-akun');
+    Route::get('/edit-akun/{id}', [AkunController::class, 'edit'])->name('edit-akun');
+    Route::post('/ubah-akun/{id}', [AkunController::class, 'update'])->name('ubah-akun');
+    Route::get('/hapus-akun/{id}', [AkunController::class, 'destroy'])->name('hapus-akun');
 
     
 });
 
-// Beranda User
-Route::get('/beranda', [BerandaController::class, 'index'])->name('beranda');
-Route::get('/detail/{slug}', [BerandaController::class, 'detail']);
+
+Route::middleware(['auth'])->group(function () {
+    
+    // Beranda User
+    Route::get('/beranda', [BerandaController::class, 'index'])->name('beranda');
+    Route::get('/detail/{slug}', [BerandaController::class, 'detail']);
+
+    // Keranjang
+    Route::get('/keranjang', [KeranjangController::class, 'index'])->name('keranjang');
+    Route::post('/tambah-keranjang/{id}', [KeranjangController::class, 'keranjangadd'])->name('tambah-keranjang');
+    Route::get('/hapus-keranjang/{id}', [KeranjangController::class, 'destroy'])->name('hapus-keranjang');
+
+    // Elektronik
+    Route::get('/elektronik', [ElektronikController::class, 'index'])->name('elektronik');
+    Route::get('/pakaian', [PakaianController::class, 'index'])->name('pakaian');
+
+});
 
 
 // Login

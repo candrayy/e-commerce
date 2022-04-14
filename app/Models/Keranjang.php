@@ -12,11 +12,16 @@ class Keranjang extends Model
     protected $primarykey = 'id';
     public $timestamps = false;
     protected $fillable = [
-        'produk_id',
+        'produk_id', 'user_id'
     ];
 
     public function produk()
     {
         return $this->belongsTo(Produk::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class);
     }
 }
