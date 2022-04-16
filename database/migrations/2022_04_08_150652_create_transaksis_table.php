@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('produk_id');
+            $table->integer('harga');
             $table->integer('ongkir');
             $table->integer('total');
             $table->string('status')->nullable();

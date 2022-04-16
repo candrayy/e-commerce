@@ -12,7 +12,7 @@ class Transaksi extends Model
     protected $primaryKey = 'id';
     public $timestamp = false;
     protected $fillable = [
-        'id_user', 'ongkir', 'total', 'status',
+        'user_id', 'produk_id', 'harga', 'ongkir', 'total', 'status',
         'resi',
     ];
 

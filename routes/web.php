@@ -11,6 +11,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\ElektronikController;
 use App\Http\Controllers\PakaianController;
+use App\Http\Controllers\TransaksiController;
 
 
 /*
@@ -71,9 +72,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/tambah-keranjang/{id}', [KeranjangController::class, 'keranjangadd'])->name('tambah-keranjang');
     Route::get('/hapus-keranjang/{id}', [KeranjangController::class, 'destroy'])->name('hapus-keranjang');
 
-    // Elektronik
+    // Kategori User
     Route::get('/elektronik', [ElektronikController::class, 'index'])->name('elektronik');
     Route::get('/pakaian', [PakaianController::class, 'index'])->name('pakaian');
+
+    // Transaksi
+    Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi');
+    Route::post('/beli', [TransaksiController::class, 'beli'])->name('beli');
 
 });
 

@@ -3,15 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Transaksi;
 use App\Models\Produk;
 use App\Models\Keranjang;
-use App\Models\Transaksi;
 use App\Models\Ongkir;
 
-class KeranjangController extends Controller
+class TransaksiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,8 +19,36 @@ class KeranjangController extends Controller
      */
     public function index()
     {
-        $dtKeranjang = Keranjang::where('user_id', Auth::id())->paginate(5);
-        return view('user.keranjang.keranjang', compact('dtKeranjang'));
+        $dtKeranjang = Keranjang::with('produk')->where('user_id', Auth::id())->get();
+        // $dtProduk = Produk::select('id', 'nama', 'harga')->where('id', $dtKeranjang);
+        // dd($dtKeranjang);
+        return view('user.transaksi.transaksi', compact('dtKeranjang'));
+    }
+
+    public function beli(Request $request)
+    {
+        // $user = Auth::user();
+        $keranjang = Keranjang::with('produk','user')->where('user_id', Auth::user()->id)->get();
+        $transaksi = Transaksi::create([
+            'user_id' => Auth::User()->id,
+            'produk_id' => $request->produk_id,
+            'harga' => $request->harga,
+            'ongkir' => 0,
+            'total' => 0,
+            'status' => 'PENDING',
+            'resi' => 'Tidak Ada',
+        ]);
+
+        // foreach ($keranjang as $k) {
+        //     $transaksi->produk()->attach($k->produk_id,[
+        //         'produk_id' => $k->produk->nama_produk,
+        //         'harga' => $k->produk->harga,
+        //         'ongkir' => $k->ongkir->ongkir,
+        //     ]);
+
+        //     $transaksi->increment('total', $k->produk->harga + $k->ongkir->ongkir);
+        // }
+        dd($transaksi);
     }
 
     /**
@@ -40,35 +67,9 @@ class KeranjangController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function keranjangadd(Request $request, $id)
+    public function store(Request $request)
     {
-        // if(Auth::id())
-        // {
-        //     $user = Auth::user();
-            // $ongkir = Ongkir::firstOrFail();
-            // $produk = Produk::firstOrFail();
-        //     $keranjang = new Keranjang;
-        //     $keranjang->user_id = $user->name;
-        //     $keranjang->produk_id = $produk->nama_produk;
-        //     $keranjang->ongkir_id = $ongkir->ongkir;
-        //     dd($keranjang);
-        //     $keranjang->save();
-        //     return redirect('keranjang');
-        // }
-        // else
-        // {
-        //     return redirect()->back();
-        // }
-        
-        $data = Keranjang::create([
-            'user_id' => Auth::user()->id,
-            'produk_id' => $id,
-            'ongkir_id' => $id,
-        ]);
-    
-        // $data->save();
-        dd($data);
-        return redirect('keranjang');
+        //
     }
 
     /**
@@ -113,8 +114,6 @@ class KeranjangController extends Controller
      */
     public function destroy($id)
     {
-        $dtKeranjang = Keranjang::find($id);
-        $dtKeranjang->delete();
-        return redirect()->back();
+        //
     }
 }

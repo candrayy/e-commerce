@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('produk_id')->references('id')->on('produks')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('ongkir_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             // $table->string('user')->nullable();
             // $table->string('no_hp')->nullable();
             // $table->string('nama_produk')->nullable();

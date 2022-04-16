@@ -9,16 +9,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Detail - {{ $detail->nama_produk }}</title>
+    <title>Keranjang</title>
 
     <!-- Custom fonts for this template-->
-    <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link href="assets/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
@@ -177,31 +177,29 @@
                             </div>
                         </li>
 
-
+                        
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
+                            
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
                                 <img class="img-profile rounded-circle"
-                                    src="{{ asset('assets/img/undraw_profile.svg') }}">
+                                    src="assets/img/undraw_profile.svg">
                             </a>
+                            
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="{{ route('login') }}">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Login
+                                </a>
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -221,34 +219,82 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Detail Produk</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Pembayaranmu</h1>
                     </div>
 
 
                     <!-- Kategori Card Example -->
-                    <div class="card shadow-sm p-3 bg-body rounded" style="width: 18rem;">
-                    <img class="card-img-top" src="{{ asset('images/produk/'. $detail->gambar ) }}" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">{{ $detail->nama_produk }}</h5>
-                        <p class="fs-5">Rp {{ $detail->harga }}</p>
-                        <div class="form-group">
-                            <label for="kategori_id" class="form-label">Ongkir</label>
-                            <select class="form-control" name="ongkir_id" id="ongkir_id">
-                            @foreach($ongkir as $data)
-                            <option value="{{ $data->id }}">Rp. {{ $data->ongkir }}</option>
-                            @endforeach
-                            </select>
+                    <!-- <div class="card shadow mb-4"> -->
+                        @foreach ($dtKeranjang as $item)
+                        <div class="card shadow mb-3" style="max-width: 100%;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                            <img src="{{ asset('images/produk/'.$item->produk->gambar ) }}" class="img-fluid rounded-start rounded" style ="max-width: 50%" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                            <div class="card-body">
+                                <div>
+                                    <lable class="fw-bolder">Nama Produk</lable>
+                                    :
+                                    <span>{{ $item->produk->nama_produk }}</span>
+                                </div>
+                                <div>
+                                    <lable class="fw-bolder">Harga Barang</lable>
+                                    :
+                                    <span>Rp {{ $item->produk->harga }}</span>
+                                </div>
+                                <div>
+                                    <lable class="fw-bolder">Ongkir</lable>
+                                    :
+                                    <span>Rp {{ $item->ongkir->ongkir }}</span>
+                                </div>
+                            </div>
+                            </div>
                         </div>
-                        <p class="card-text">{!! $detail->deskripsi !!}</p>
-                    </div>
-                    <form action="{{ route('tambah-keranjang',$detail->id) }}" method="POST">
-                        {{ csrf_field()}}
-                        <div class="card-footer bg-white">
-                            <button type="submit" class="btn btn-success px-3">
-                                <i class="fas fa-cart-arrow-down"></i>
-                            </button>
                         </div>
-                    </div>
+                        @endforeach
+
+                        <div class="card shadow mb-3" style="max-width: 100%;">
+                        <div class="row g-0">
+                            <div class="col-md-8">
+                            <div class="card-body">
+                                <form action="{{ route('beli') }}" method="POST" enctype="multipart/form-data">
+                                {{ csrf_field()}}
+                                <div class="form-group">
+                                    <label for="name">Total Barang</label>
+                                    @foreach($dtKeranjang as $item)
+                                    <p>Rp. {{ $item->produk->harga + $item->ongkir->ongkir}}</p>
+                                    @endforeach
+                                </div>
+                                <hr>
+                                <div class="form-group">
+                                    <label for="name">Nama Pemesan</label>
+                                    <input type="text" id="name" name="name" class="form-control" placeholder="Masukan Nama Pemesan" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="alamat">Alamat</label>
+                                    <textarea type="text" id="alamat" name="alamat" class="form-control" placeholder="Masukan Alamat" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="provinsi">Provinsi</label>
+                                    <input type="text" id="provinsi" name="provinsi" class="form-control" placeholder="Masukan Nama Provinsi" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="kota">Kota</label>
+                                    <input type="text" id="kota" name="kota" class="form-control" placeholder="Masukan Nama Kota" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="kode_pos">Kode Pos</label>
+                                    <input type="text" id="kode_pos" name="kode_pos" class="form-control" placeholder="Masukan Kode Pos" required>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success btn-submit">Pesan</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    <!-- </div> -->
 
                 </div>
                 <!-- /.container-fluid -->
@@ -291,28 +337,28 @@
                 <div class="modal-body">Klik logout untuk keluar</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="{{ route('logout') }}">Logout</a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="assets/vendor/jquery/jquery.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="{{ asset('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+    <script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="{{ asset('assets/js/sb-admin-2.min.js') }}"></script>
+    <script src="assets/js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="{{ asset('assets/vendor/chart.js/Chart.min.js') }}"></script>
+    <script src="assets/vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="{{ asset('assets/js/demo/chart-area-demo.js') }}"></script>
-    <script src="{{ asset('assets/js/demo/chart-pie-demo.js') }}"></script>
+    <script src="assets/js/demo/chart-area-demo.js"></script>
+    <script src="assets/js/demo/chart-pie-demo.js"></script>
 
 </body>
 

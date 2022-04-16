@@ -10,6 +10,7 @@ use App\Models\Produk;
 use App\Models\Kategori;
 use App\Models\Keranjang;
 use App\Models\Transaksi;
+use App\Models\Ongkir;
 
 class BerandaController extends Controller
 {
@@ -93,7 +94,8 @@ class BerandaController extends Controller
 
     public function detail($slug)
     {
+        $ongkir = Ongkir::get()->all();
         $detail = Produk::where('slug', $slug)->first();
-        return view('user.detail', compact('detail'));
+        return view('user.detail', compact('detail', 'ongkir'));
     }
 }
