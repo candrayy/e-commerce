@@ -239,10 +239,35 @@
                             </div>
                             <hr>
                             <form>
+                                <div class="form-group">
+                                    <label class="form-label">Nama Produk :</label>
+                                    <div>
+                                        @foreach($dtnama_produk as $np)
+                                            {{ $loop->iteration }}. {{ $np }} = Rp. 
+                                                @foreach($dtharga_produk as $hp)
+                                                    @if($loop->index == $loop->parent->index)
+                                                        {{ $hp }}
+                                                    @endif
+                                                @endforeach
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </form>
+                            <form>
+                                <div class="form-group">
+                                    <label class="form-label">Biaya Ongkir :</label>
+                                    <div>
+                                    {{ $kd_ongkir }} - Rp. {{ $harga_ongkir }} x {{ $dtcount_produk }}
+                                    </div>
+                                </div>
+                            </form>
+                            <form>
                                 <fieldset disabled>
                                 <div class="form-group">
-                                    <label class="form-label">Nama Produk</label>
-                                    <input type="text" id="#" name="#" class="form-control" value="">{{ dd($transaksi) }}
+                                    <label class="form-label">Total Bayar :</label>
+                                    <div>
+                                    Rp. {{ $total }}
+                                    </div>
                                 </div>
                             </form>
                                     <!--<span>{{ dd(Session::get('cart')) }}</span>-->

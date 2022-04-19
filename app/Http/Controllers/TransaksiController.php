@@ -32,25 +32,26 @@ class TransaksiController extends Controller
     public function beli(Request $request)
     {
         // $user = Auth::user();
-        $ongkir = Ongkir::all();
+        $ongkir = Ongkir::where('id', $request['ongkir_id'])->get();
         $keranjang = Keranjang::with('produk')->where('user_id', Auth::user()->id)->get();
         foreach ($keranjang as $datas){
             $dtNamaProduk[] = $datas->produk->nama_produk;
+            $dtHargaProduk[] = $datas->produk->harga;
         }
         
+        $total = (count($dtNamaProduk) * $ongkir[0]['ongkir']) + array_sum($dtHargaProduk);
         $transaksi = collect([
             'user_id' => Auth::User()->id,
-            // 'produk_id' => $keranjang->produk_id,
             'nama_produk' => $dtNamaProduk,
+            'harga_produk' => $dtHargaProduk,
             'ongkir_id' => $request->ongkir_id,
-            'total' => 0,
+            'total' => $total,
             'status' => 'Pending',
             'resi' => 'Tidak Ada',
         ]);
-        //dd($transaksi);
 
         $request->session()->push('carts', $transaksi);
-        
+        // dd($dtHargaProduk);
         return redirect ('invoice');
     }
 

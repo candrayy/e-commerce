@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -21,26 +22,52 @@ class InvoiceController extends Controller
     public function index(Request $request)
     {
         $transaksi = $request->session()->get('carts');
-        // dd($transaksi);
-        return view('user.transaksi.invoice', compact('transaksi'));
+
+        // Display Total Product
+        $total = $transaksi[0]['total'];
+
+        // Display Produk Name
+        $dtnama_produk = $transaksi[0]['nama_produk'];
+        $dtharga_produk = $transaksi[0]['harga_produk'];
+
+        // Display Ongkir
+        $ongkirs = Ongkir::where('id', $transaksi[0]['ongkir_id'])->get();
+        $kd_ongkir = $ongkirs[0]['kd_ongkir'];
+
+        // Display Price Ongkir
+        $harga_ongkir = $ongkirs[0]['ongkir'];
+
+        // Display X Produk
+        $keranjang = Keranjang::with('produk')->where('user_id', Auth::user()->id)->get();
+        foreach ($keranjang as $datas){
+            $count_produk[] = $datas->produk->harga;
+        }
+        $dtcount_produk = count($count_produk);
+        
+        // dd($dtproduk_nama_harga);
+        return view('user.transaksi.invoice', compact('total', 'dtnama_produk', 'dtharga_produk', 'kd_ongkir', 'harga_ongkir', 'dtcount_produk'));
     }
 
     public function kirim(Request $request)
     {
         $transaksi = $request->session()->get('carts');
+        // $transaksi->each(function ($item, $key) {
+            
+        //     // Do stuff
+        // });
         $data = Transaksi::create([
-            'user_id' => Auth::user()->id,
-            'ongkir_id' => $request['ongkir_id'],
-            'nama_produk' => $request['nama_produk'],
-            'total' => $request['total'] + $request['ongkir_id'],
+            'user_id' => $transaksi[0]['user_id'],
+            'ongkir_id' => $transaksi[0]['ongkir_id'],
+            'nama_produk' => $transaksi[0]['nama_produk'],
+            'total' => $transaksi[0]['total'],
             'status' => 'Pending',
             'resi' => 'Tidak Ada',
         ]);
-        dd($data);
+        
         // (store to db)
         $request->session()->forget('carts');
         // dd($transaksi);
-        return view('user.transaksi.invoice');
+        return redirect('beranda');
     }
 
     /**
