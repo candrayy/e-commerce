@@ -89,6 +89,13 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link" href="{{ route('ongkir') }}">
+                    <i class="fas fa-fw fa-truck"></i>
+                    <span>Ongkir</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link" href="#">
                     <i class="fas fa-fw fa-money-bill"></i>
                     <span>Transaksi</span>

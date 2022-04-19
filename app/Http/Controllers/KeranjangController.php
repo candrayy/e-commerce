@@ -9,7 +9,6 @@ use App\Models\User;
 use App\Models\Produk;
 use App\Models\Keranjang;
 use App\Models\Transaksi;
-use App\Models\Ongkir;
 
 class KeranjangController extends Controller
 {
@@ -21,6 +20,7 @@ class KeranjangController extends Controller
     public function index()
     {
         $dtKeranjang = Keranjang::where('user_id', Auth::id())->paginate(5);
+        //dd($dtKeranjang);
         return view('user.keranjang.keranjang', compact('dtKeranjang'));
     }
 
@@ -63,11 +63,10 @@ class KeranjangController extends Controller
         $data = Keranjang::create([
             'user_id' => Auth::user()->id,
             'produk_id' => $id,
-            'ongkir_id' => $id,
         ]);
     
-        // $data->save();
-        dd($data);
+        //dd($data);
+        $data->save();
         return redirect('keranjang');
     }
 

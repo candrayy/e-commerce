@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin - Kategori</title>
+    <title>Admin - Ongkir</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -227,7 +227,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Ubah Kategori</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Ubah Ongkir</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
@@ -236,19 +236,19 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">
-                                Ubah Data Kategori
+                                Ubah Data Ongkir
                             </h6>
                         </div>
                         <div class="card-body">
-                        <form action="{{ route('ubah-kategori',$dtKategori->id) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('ubah-ongkir',$dtOngkir->id) }}" method="post" enctype="multipart/form-data">
                             {{ csrf_field()}}
                             <div class="form-group">
-                                <label for="kd_kategori" class="form-label">Kode Kategori</label>
-                                <input type="text" id="kd_kategori" name="kd_kategori" class="form-control" value="{{ $dtKategori->kd_kategori }}" required>
+                                <label for="kd_ongkir" class="form-label">Kode Ongkir</label>
+                                <input type="text" id="kd_ongkir" name="kd_ongkir" class="form-control" value="{{ $dtOngkir->kd_ongkir }}" required>
                             </div>
                             <div class="form-group">
-                                <label for="nama_kategori" class="form-label">Nama Kategori</label>
-                                <input type="text" id="nama_kategori" name="nama_kategori" class="form-control" value="{{ $dtKategori->nama_kategori }}" required>
+                                <label for="nama_kategori" class="form-label">Harga Ongkir</label>
+                                <input type="number" id="ongkir" name="ongkir" class="form-control" value="{{ $dtOngkir->ongkir }}" required>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success btn-submit">Simpan</button>
@@ -310,21 +310,21 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="assets/vendor/jquery/jquery.min.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="{{ asset('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="assets/js/sb-admin-2.min.js"></script>
+    <script src="{{ asset('assets/js/sb-admin-2.min.js') }}"></script>
 
     <!-- Page level plugins -->
-    <script src="assets/vendor/chart.js/Chart.min.js"></script>
+    <script src="{{ asset('assets/vendor/chart.js/Chart.min.js') }}"></script>
 
     <!-- Page level custom scripts -->
-    <script src="assets/js/demo/chart-area-demo.js"></script>
-    <script src="assets/js/demo/chart-pie-demo.js"></script>
+    <script src="{{ asset('assets/js/demo/chart-area-demo.js') }}"></script>
+    <script src="{{ asset('assets/js/demo/chart-pie-demo.js') }}"></script>
 
 </body>
 

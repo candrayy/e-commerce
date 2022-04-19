@@ -3,20 +3,44 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Transaksi;
+use App\Models\Produk;
+use App\Models\Keranjang;
+use App\Models\Ongkir;
 
-class AkunController extends Controller
+class InvoiceController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $dtAkun = User::where('role', 'adm')->paginate(5);
-        return view('admin.akun.akun', compact('dtAkun'));
+        $transaksi = $request->session()->get('carts');
+        // dd($transaksi);
+        return view('user.transaksi.invoice', compact('transaksi'));
+    }
+
+    public function kirim(Request $request)
+    {
+        $transaksi = $request->session()->get('carts');
+        $data = Transaksi::create([
+            'user_id' => Auth::user()->id,
+            'ongkir_id' => $request['ongkir_id'],
+            'nama_produk' => $request['nama_produk'],
+            'total' => $request['total'] + $request['ongkir_id'],
+            'status' => 'Pending',
+            'resi' => 'Tidak Ada',
+        ]);
+        dd($data);
+        // (store to db)
+        $request->session()->forget('carts');
+        // dd($transaksi);
+        return view('user.transaksi.invoice');
     }
 
     /**
@@ -26,7 +50,7 @@ class AkunController extends Controller
      */
     public function create()
     {
-        return view('admin.akun.tambah-akun');
+        //
     }
 
     /**
@@ -37,14 +61,7 @@ class AkunController extends Controller
      */
     public function store(Request $request)
     {
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'no_hp' => $request->no_hp,
-            'role' => $request->role,
-        ]);
-        return redirect('akun');
+        //
     }
 
     /**
@@ -66,8 +83,7 @@ class AkunController extends Controller
      */
     public function edit($id)
     {
-        $dtAkun = User::findorfail($id);
-        return view('admin.akun.edit-akun', compact('dtAkun'));
+        //
     }
 
     /**
@@ -79,15 +95,7 @@ class AkunController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $dtAkun = User::findorfail($id);
-        $dtAkun->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'no_hp' => $request->no_hp,
-            'role' => $request->role,
-        ]);
-        return redirect('akun');
+        //
     }
 
     /**
@@ -98,8 +106,6 @@ class AkunController extends Controller
      */
     public function destroy($id)
     {
-        $dtAkun = User::findorfail($id);
-        $dtAkun->delete();
-        return redirect('akun');
+        //
     }
 }

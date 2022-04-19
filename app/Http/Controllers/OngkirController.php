@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Ongkir;
 
-class AkunController extends Controller
+class OngkirController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +17,8 @@ class AkunController extends Controller
      */
     public function index()
     {
-        $dtAkun = User::where('role', 'adm')->paginate(5);
-        return view('admin.akun.akun', compact('dtAkun'));
+        $dtOngkir = Ongkir::paginate(5);
+        return view('admin.ongkir.ongkir', compact('dtOngkir'));
     }
 
     /**
@@ -26,7 +28,7 @@ class AkunController extends Controller
      */
     public function create()
     {
-        return view('admin.akun.tambah-akun');
+        return view ('admin.ongkir.tambah-ongkir');
     }
 
     /**
@@ -37,14 +39,11 @@ class AkunController extends Controller
      */
     public function store(Request $request)
     {
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'no_hp' => $request->no_hp,
-            'role' => $request->role,
+        Ongkir::create([
+            'kd_ongkir' => $request->kd_ongkir,
+            'ongkir' => $request->ongkir,
         ]);
-        return redirect('akun');
+        return redirect('ongkir');
     }
 
     /**
@@ -66,8 +65,8 @@ class AkunController extends Controller
      */
     public function edit($id)
     {
-        $dtAkun = User::findorfail($id);
-        return view('admin.akun.edit-akun', compact('dtAkun'));
+        $dtOngkir = Ongkir::findorfail($id);
+        return view('admin.ongkir.edit-ongkir', compact('dtOngkir'));
     }
 
     /**
@@ -79,15 +78,12 @@ class AkunController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $dtAkun = User::findorfail($id);
-        $dtAkun->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'no_hp' => $request->no_hp,
-            'role' => $request->role,
+        $dtOngkir = Ongkir::findorfail($id);
+        $dtOngkir->update([
+            'kd_ongkir' => $request->kd_ongkir,
+            'ongkir' => $request->ongkir,
         ]);
-        return redirect('akun');
+        return redirect('ongkir');
     }
 
     /**
@@ -98,8 +94,8 @@ class AkunController extends Controller
      */
     public function destroy($id)
     {
-        $dtAkun = User::findorfail($id);
-        $dtAkun->delete();
-        return redirect('akun');
+        $dtOngkir = Ongkir::findorfail($id);
+        $dtOngkir->delete();
+        return redirect('ongkir');
     }
 }

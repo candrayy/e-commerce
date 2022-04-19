@@ -11,8 +11,11 @@ class Transaksi extends Model
     protected $table = 'transaksis';
     protected $primaryKey = 'id';
     public $timestamp = false;
+    protected $casts = [
+        'nama_produk' => 'array',
+    ];
     protected $fillable = [
-        'user_id', 'produk_id', 'harga', 'ongkir', 'total', 'status',
+        'user_id', 'nama_produk', 'ongkir_id', 'total', 'status',
         'resi',
     ];
 
@@ -21,8 +24,8 @@ class Transaksi extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function produk()
+    public function ongkir()
     {
-        return $this->belongsTo(Produk::class);
+        return $this->belongsTo(Ongkir::class);
     }
 }

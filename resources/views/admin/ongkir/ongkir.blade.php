@@ -9,16 +9,17 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin - Kategori</title>
+    <title>Admin - Ongkir</title>
+    <link rel="icon" href="assets/images/shops.png">
 
     <!-- Custom fonts for this template-->
-    <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link href="assets/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
@@ -159,7 +160,7 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                        <!-- Nav Item - Search Dropdown (Vdeskripsible Only XS) -->
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -192,7 +193,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
                                 <img class="img-profile rounded-circle"
-                                    src="{{ asset('assets/img/undraw_profile.svg') }}">
+                                    src="assets/img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -227,7 +228,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Ubah Kategori</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Ongkir</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
@@ -235,24 +236,35 @@
                     <!-- Content Row -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">
-                                Ubah Data Kategori
-                            </h6>
+                            <a href="{{ route('tambah-ongkir') }}" class="btn btn-primary btn-icon-split" type="button">
+                                <span class="text">Tambah Data</span>
+                            </a>
                         </div>
                         <div class="card-body">
-                        <form action="{{ route('ubah-kategori',$dtKategori->id) }}" method="post" enctype="multipart/form-data">
-                            {{ csrf_field()}}
-                            <div class="form-group">
-                                <label for="kd_kategori" class="form-label">Kode Kategori</label>
-                                <input type="text" id="kd_kategori" name="kd_kategori" class="form-control" value="{{ $dtKategori->kd_kategori }}" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="nama_kategori" class="form-label">Nama Kategori</label>
-                                <input type="text" id="nama_kategori" name="nama_kategori" class="form-control" value="{{ $dtKategori->nama_kategori }}" required>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-success btn-submit">Simpan</button>
-                            </div>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">No</th>
+                                        <th scope="col">Kode Ongkir</th>
+                                        <th scope="col">Harga Ongkir</th>
+                                        <th scope="col">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($dtOngkir as $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->kd_ongkir }}</td>
+                                        <td>Rp. {{ $item->ongkir }}</td>
+                                        <td>
+                                            <a href="{{ route('edit-ongkir', $item->id) }}" class="btn btn-success btn-icon btn-sm" type="button"><span>Ubah</span></a>
+                                            <a href="{{ route('hapus-ongkir', $item->id) }}" class="btn btn-danger btn-icon btn-sm" type="button"><span>Hapus</span></a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            {{ $dtOngkir->links() }}
                         </div>
                     </div>
 

@@ -16,14 +16,15 @@ return new class extends Migration
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('produk_id');
-            $table->integer('harga');
-            $table->integer('ongkir');
+            $table->unsignedBigInteger('ongkir_id');
+            // $table->unsignedBigInteger('produk_id');
+            $table->json('nama_produk');
             $table->integer('total');
-            $table->string('status')->nullable();
+            $table->string('status')->default('PENDING');
             $table->string('resi');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('produk_id')->references('id')->on('produks')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('ongkir_id')->references('id')->on('ongkirs')->onUpdate('cascade')->onDelete('cascade');
+            // $table->foreign('produk_id')->references('id')->on('produks')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

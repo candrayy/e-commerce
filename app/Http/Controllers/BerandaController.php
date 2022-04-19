@@ -94,8 +94,8 @@ class BerandaController extends Controller
 
     public function detail($slug)
     {
-        $ongkir = Ongkir::get()->all();
         $detail = Produk::where('slug', $slug)->first();
-        return view('user.detail', compact('detail', 'ongkir'));
+        //dd($detail);
+        return view('user.detail', compact('detail'));
     }
 }

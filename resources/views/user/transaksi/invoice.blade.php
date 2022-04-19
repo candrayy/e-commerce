@@ -9,16 +9,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin - Kategori</title>
+    <title>Invoice</title>
 
     <!-- Custom fonts for this template-->
-    <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link href="assets/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
@@ -35,17 +35,17 @@
                 <div class="sidebar-brand-icon">
                     <i class="fas fa-store rotate-n-15"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Admin E-Commerce</div>
+                <div class="sidebar-brand-text mx-3">E-Commerce</div>
             </a>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
+            <!-- Nav Item - Beranda -->
             <li class="nav-item active">
-                <a class="nav-link" href="{{ route('admin') }}">
+                <a class="nav-link" href="{{ route('beranda') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Beranda</span></a>
             </li>
 
             <!-- Divider -->
@@ -53,7 +53,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Produk & Transaksi
+                Daftar Menu
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -74,23 +74,9 @@
 
             <!-- Nav Item - katalog Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('produk') }}">
-                    <i class="fas fa-fw fa-desktop"></i>
-                    <span>Produk</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('kategori') }}">
-                    <i class="fas fa-fw fa-book"></i>
-                    <span>Kategori</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('ongkir') }}">
-                    <i class="fas fa-fw fa-truck"></i>
-                    <span>Ongkir</span>
+                <a class="nav-link" href="{{ route('keranjang') }}">
+                    <i class="fas fa-fw fa-cart-arrow-down"></i>
+                    <span>Keranjang</span>
                 </a>
             </li>
 
@@ -107,23 +93,31 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Akun
+                Kategori
             </div>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('akun') }}">
-                    <i class="fas fa-fw fa-user"></i>
-                    <span>User Admin</span>
+                <a class="nav-link" href="{{ route('elektronik') }}">
+                    <i class="fas fa-fw fa-blender"></i>
+                    <span>Elektronik</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('pakaian') }}">
+                    <i class="fas fa-fw fa-socks"></i>
+                    <span>Pakaian</span>
                 </a>
             </li>
 
             <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
+            <hr class="sidebar-divider">
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
+
 
         </ul>
         <!-- End of Sidebar -->
@@ -159,7 +153,7 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                        <!-- Nav Item - Search Dropdown (Vdeskripsible Only XS) -->
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -183,31 +177,29 @@
                             </div>
                         </li>
 
-
+                        
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
+                            
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
                                 <img class="img-profile rounded-circle"
-                                    src="{{ asset('assets/img/undraw_profile.svg') }}">
+                                    src="assets/img/undraw_profile.svg">
                             </a>
+                            
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="{{ route('login') }}">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Login
+                                </a>
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -224,43 +216,58 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
+                
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Ubah Kategori</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        <h1 class="h3 mb-0 text-gray-800">Invoicemu</h1>
                     </div>
 
-                    <!-- Content Row -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">
-                                Ubah Data Kategori
-                            </h6>
+
+                    <!-- Kategori Card Example -->
+                    <!-- <div class="card shadow mb-4"> -->
+                        <div class="card shadow mb-3" style="max-width: auto;">
+                        <div class="row g-0">
+                            <div class="col-md-8">
+                            <div class="card-body">
+                            <div class="ms-3">
+                                <form action="{{ route('kirim') }}" method="POST" enctype="multipart/form-data">
+                                    {{ csrf_field()}}
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-success btn-submit">Pesan</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <hr>
+                            <form>
+                                <fieldset disabled>
+                                <div class="form-group">
+                                    <label class="form-label">Nama Produk</label>
+                                    <input type="text" id="#" name="#" class="form-control" value="">{{ dd($transaksi) }}
+                                </div>
+                            </form>
+                                    <!--<span>{{ dd(Session::get('cart')) }}</span>-->
+                                <!--@foreach ($np as $item => $i)
+                                <div>
+                                    <lable class="fw-bolder">Nama Produk</lable>
+                                    :
+                                    <span>{{ $i }}</span>
+                                </div>
+                                @endforeach
+                                @foreach ($transaksi as $item)
+                                <div>
+                                    <lable class="fw-bolder">Harga Barang</lable>
+                                    :
+                                    <span>Rp {{ $item->total }}</span>
+                                </div>
+                                @endforeach
+-->
+                            (when click order button (redirect to beranda) and destroy the session key of cart)
+                            
                         </div>
-                        <div class="card-body">
-                        <form action="{{ route('ubah-kategori',$dtKategori->id) }}" method="post" enctype="multipart/form-data">
-                            {{ csrf_field()}}
-                            <div class="form-group">
-                                <label for="kd_kategori" class="form-label">Kode Kategori</label>
-                                <input type="text" id="kd_kategori" name="kd_kategori" class="form-control" value="{{ $dtKategori->kd_kategori }}" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="nama_kategori" class="form-label">Nama Kategori</label>
-                                <input type="text" id="nama_kategori" name="nama_kategori" class="form-control" value="{{ $dtKategori->nama_kategori }}" required>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-success btn-submit">Simpan</button>
-                            </div>
                         </div>
-                    </div>
 
-                    <!-- Content Row -->
-
-                    <div class="row">
- 
-                    </div>
+                        
+                    <!-- </div> -->
 
                 </div>
                 <!-- /.container-fluid -->

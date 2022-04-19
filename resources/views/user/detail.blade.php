@@ -231,14 +231,6 @@
                     <div class="card-body">
                         <h5 class="card-title fw-bold">{{ $detail->nama_produk }}</h5>
                         <p class="fs-5">Rp {{ $detail->harga }}</p>
-                        <div class="form-group">
-                            <label for="kategori_id" class="form-label">Ongkir</label>
-                            <select class="form-control" name="ongkir_id" id="ongkir_id">
-                            @foreach($ongkir as $data)
-                            <option value="{{ $data->id }}">Rp. {{ $data->ongkir }}</option>
-                            @endforeach
-                            </select>
-                        </div>
                         <p class="card-text">{!! $detail->deskripsi !!}</p>
                     </div>
                     <form action="{{ route('tambah-keranjang',$detail->id) }}" method="POST">

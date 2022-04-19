@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -20,35 +21,37 @@ class TransaksiController extends Controller
     public function index()
     {
         $dtKeranjang = Keranjang::with('produk')->where('user_id', Auth::id())->get();
+        $dtOngkir = Ongkir::all();
+        $dtCount = Keranjang::where('user_id', Auth::id())->count();
         // $dtProduk = Produk::select('id', 'nama', 'harga')->where('id', $dtKeranjang);
         // dd($dtKeranjang);
-        return view('user.transaksi.transaksi', compact('dtKeranjang'));
+        return view('user.transaksi.transaksi', compact('dtKeranjang', 'dtOngkir', 'dtCount'));
     }
 
+    //produk->keranjang  ->transaki     
     public function beli(Request $request)
     {
         // $user = Auth::user();
-        $keranjang = Keranjang::with('produk','user')->where('user_id', Auth::user()->id)->get();
-        $transaksi = Transaksi::create([
+        $ongkir = Ongkir::all();
+        $keranjang = Keranjang::with('produk')->where('user_id', Auth::user()->id)->get();
+        foreach ($keranjang as $datas){
+            $dtNamaProduk[] = $datas->produk->nama_produk;
+        }
+        
+        $transaksi = collect([
             'user_id' => Auth::User()->id,
-            'produk_id' => $request->produk_id,
-            'harga' => $request->harga,
-            'ongkir' => 0,
+            // 'produk_id' => $keranjang->produk_id,
+            'nama_produk' => $dtNamaProduk,
+            'ongkir_id' => $request->ongkir_id,
             'total' => 0,
-            'status' => 'PENDING',
+            'status' => 'Pending',
             'resi' => 'Tidak Ada',
         ]);
+        //dd($transaksi);
 
-        // foreach ($keranjang as $k) {
-        //     $transaksi->produk()->attach($k->produk_id,[
-        //         'produk_id' => $k->produk->nama_produk,
-        //         'harga' => $k->produk->harga,
-        //         'ongkir' => $k->ongkir->ongkir,
-        //     ]);
-
-        //     $transaksi->increment('total', $k->produk->harga + $k->ongkir->ongkir);
-        // }
-        dd($transaksi);
+        $request->session()->push('carts', $transaksi);
+        
+        return redirect ('invoice');
     }
 
     /**

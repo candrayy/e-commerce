@@ -15,8 +15,8 @@ class Ongkir extends Model
         'kd_ongkir', 'ongkir'
     ];
 
-    public function keranjang()
+    public function transaksi()
     {
-        return $this->hasMany(Keranjang::class);
+        return $this->hasMany(Transaksi::class);
     }
 }

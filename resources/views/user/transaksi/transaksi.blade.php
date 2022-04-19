@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Keranjang</title>
+    <title>Bayar</title>
 
     <!-- Custom fonts for this template-->
     <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -243,11 +243,6 @@
                                     :
                                     <span>Rp {{ $item->produk->harga }}</span>
                                 </div>
-                                <div>
-                                    <lable class="fw-bolder">Ongkir</lable>
-                                    :
-                                    <span>Rp {{ $item->ongkir->ongkir }}</span>
-                                </div>
                             </div>
                             </div>
                         </div>
@@ -261,13 +256,14 @@
                                 <form action="{{ route('beli') }}" method="POST" enctype="multipart/form-data">
                                 {{ csrf_field()}}
                                 <div class="form-group">
-                                    <label for="name">Total Barang</label>
-                                    @foreach($dtKeranjang as $item)
-                                    <p>Rp. {{ $item->produk->harga + $item->ongkir->ongkir}}</p>
+                                    <label for="name">Ongkir</label>
+                                    <select class="form-control" name="ongkir_id" id="ongkir_id">
+                                    @foreach($dtOngkir as $item)
+                                    <option value="{{ $item->id }}">{{ $item->kd_ongkir}} - Rp. {{ $item->ongkir }}</option>
                                     @endforeach
+                                    </select>
                                 </div>
-                                <hr>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="name">Nama Pemesan</label>
                                     <input type="text" id="name" name="name" class="form-control" placeholder="Masukan Nama Pemesan" required>
                                 </div>
@@ -286,7 +282,7 @@
                                 <div class="form-group">
                                     <label for="kode_pos">Kode Pos</label>
                                     <input type="text" id="kode_pos" name="kode_pos" class="form-control" placeholder="Masukan Kode Pos" required>
-                                </div>
+                                </div> -->
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-success btn-submit">Pesan</button>
                                 </div>

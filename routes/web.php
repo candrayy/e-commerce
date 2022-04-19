@@ -12,6 +12,8 @@ use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\ElektronikController;
 use App\Http\Controllers\PakaianController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\OngkirController;
+use App\Http\Controllers\InvoiceController;
 
 
 /*
@@ -57,7 +59,14 @@ Route::middleware(['auth', 'cekRole'])->group(function () {
     Route::post('/ubah-akun/{id}', [AkunController::class, 'update'])->name('ubah-akun');
     Route::get('/hapus-akun/{id}', [AkunController::class, 'destroy'])->name('hapus-akun');
 
-    
+    // Ongkir
+    Route::get('/ongkir', [OngkirController::class, 'index'])->name('ongkir');
+    Route::get('/tambah-ongkir', [OngkirController::class, 'create'])->name('tambah-ongkir');
+    Route::post('/simpan-ongkir', [OngkirController::class, 'store'])->name('simpan-ongkir');
+    Route::get('/edit-ongkir/{id}', [OngkirController::class, 'edit'])->name('edit-ongkir');
+    Route::post('/ubah-ongkir/{id}', [OngkirController::class, 'update'])->name('ubah-ongkir');
+    Route::get('/hapus-ongkir/{id}', [OngkirController::class, 'destroy'])->name('hapus-ongkir');
+
 });
 
 
@@ -79,6 +88,10 @@ Route::middleware(['auth'])->group(function () {
     // Transaksi
     Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi');
     Route::post('/beli', [TransaksiController::class, 'beli'])->name('beli');
+
+    // Invoice
+    Route::get('/invoice', [InvoiceController::class, 'index'])->name('invoice');
+    Route::post('/kirim', [InvoiceController::class, 'kirim'])->name('kirim');
 
 });
 

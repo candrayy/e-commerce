@@ -226,13 +226,17 @@
                     <!-- Kategori Card Example -->
                     <div class="card shadow mb-4">
                         <div class="card-body">
+                        <div class="mb-3">
+                            <a href="{{ route('transaksi') }}" class="btn btn-success btn-icon-split" type="button">
+                                <span class="text">Bayar Sekarang</span>
+                            </a>
+                        </div>
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th scope="col">No</th>
                                         <th scope="col">Nama Produk</th>
                                         <th scope="col">Harga</th>
-                                        <th scope="col">Ongkir</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
@@ -242,9 +246,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->produk->nama_produk }}</td>
                                         <td>Rp {{ $item->produk->harga }}</td>
-                                        <td>Rp {{ $item->ongkir->ongkir }}</td>
                                         <td>
-                                            <a href="{{ route('edit-kategori', $item->id) }}" class="btn btn-success btn-icon btn-sm" type="button"><span>Bayar</span></a>
                                             <a href="{{ route('hapus-keranjang', $item->id) }}" class="btn btn-danger btn-icon btn-sm" type="button"><span>Hapus</span></a>
                                         </td>
                                     </tr>
