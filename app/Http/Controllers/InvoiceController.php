@@ -63,11 +63,11 @@ class InvoiceController extends Controller
             'status' => 'Pending',
             'resi' => 'Tidak Ada',
         ]);
-        
-        // (store to db)
         $request->session()->forget('carts');
+        Keranjang::where('user_id', Auth::user()->id)->delete();
+        
         // dd($transaksi);
-        return redirect('beranda');
+        return redirect('keranjang');
     }
 
     /**

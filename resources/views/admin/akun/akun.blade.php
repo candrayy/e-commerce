@@ -264,7 +264,7 @@
                                         <td>{{ $item->role }}</td>
                                         <td>
                                             <a href="{{ route('edit-akun', $item->id) }}" class="btn btn-success btn-icon btn-sm" type="button"><span>Ubah</span></a>
-                                            <a href="{{ route('hapus-akun', $item->id) }}" class="btn btn-danger btn-icon btn-sm" type="button"><span>Hapus</span></a>
+                                            <a href="{{ route('hapus-akun', $item->id) }}" class="btn btn-danger btn-icon btn-sm delete-confirm" type="button"><span>Hapus</span></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -343,6 +343,31 @@
     <!-- Page level custom scripts -->
     <script src="assets/js/demo/chart-area-demo.js"></script>
     <script src="assets/js/demo/chart-pie-demo.js"></script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        $('.delete-confirm').on('click', function (event) {
+            event.preventDefault();
+            const url = $(this).attr('href');
+            swal({
+                title: "Yakin hapus data ?",
+                text: "Jika terhapus data tidak dapat dipulihkan!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                })
+                .then((willDelete) => {
+                if (willDelete) {
+                    window.location.href = url;
+                    swal("Sukses! Data terhapus", {
+                    icon: "success",
+                    });
+                } else {
+                    swal("Data tidak jadi dihapus!");
+                }
+            });
+        });
+    </script>
 
 </body>
 
