@@ -249,6 +249,7 @@
                                         <th scope="col">Kategori</th>
                                         <th scope="col">Kode Produk</th>
                                         <th scope="col">Nama Produk</th>
+                                        <th scope="col">Stok</th>
                                         <th scope="col">Harga</th>
                                         <th scope="col">Deskpripsi</th>
                                         <th scope="col">Aksi</th>
@@ -264,6 +265,7 @@
                                         <td>{{ $item->kategori->nama_kategori }}</td>
                                         <td>{{ $item->kd_produk }}</td>
                                         <td>{{ $item->nama_produk }}</td>
+                                        <td>{{ $item->stok }}</td>
                                         <td>Rp {{ $item->harga }}</td>
                                         <td>{!! Str::limit($item->deskripsi, 10) !!}</td>
                                         <td>

@@ -230,15 +230,20 @@
                     <img class="card-img-top" src="{{ asset('images/produk/'. $detail->gambar ) }}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title fw-bold">{{ $detail->nama_produk }}</h5>
-                        <p class="fs-5">Rp {{ $detail->harga }}</p>
+                        <p class="card-text">Produk : {{ $detail->stok }}</p>
+                        <p class="card-text">Harga : Rp {{ $detail->harga }}</p>
                         <p class="card-text">{!! $detail->deskripsi !!}</p>
                     </div>
                     <form action="{{ route('tambah-keranjang',$detail->id) }}" method="POST">
                         {{ csrf_field()}}
                         <div class="card-footer bg-white">
+                            @if($detail->stok == 'Tersedia')
                             <button type="submit" class="btn btn-success px-3">
                                 <i class="fas fa-cart-arrow-down"></i>
                             </button>
+                            @else
+                            <h5 style="color: white; background-color: red;" class="text-center">BARANG TIDAK TERSEDIA</h5>
+                            @endif
                         </div>
                     </div>
 

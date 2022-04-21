@@ -263,6 +263,10 @@
                                 <input type="text" id="nama_produk" name="nama_produk" class="form-control" placeholder="Masukan Nama Produk" required>
                             </div>
                             <div class="form-group">
+                                <label for="stok" class="form-label">Stok Produk</label>
+                                <input type="text" id="stok" name="stok" class="form-control" placeholder="Masukan Stok Produk" required>
+                            </div>
+                            <div class="form-group">
                                 <label for="harga" class="form-label">Harga</label>
                                 <input type="number" id="harga" name="harga" min="0" class="form-control" placeholder="Masukan Harga Produk" required>
                             </div>

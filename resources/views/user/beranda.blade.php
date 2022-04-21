@@ -233,8 +233,13 @@
                             <h5 class="card-title fw-bold">
                                 <a>{{ $item->nama_produk }}</a>
                             </h5>
-                            <p class="fs-5">Rp {{ $item->harga }}</p>
+                            @if($item->stok == 'Tersedia')
+                            <p class="card-text">Produk : {{ $item->stok }}</p>
+                            <p class="card-text">Harga : Rp {{ $item->harga }}</p>
                             <p class="card-text">{!! Str::limit($item->deskripsi, 20) !!}</p>
+                            @else
+                            <h5 style="color: red;" class="text-center">BARANG TIDAK TERSEDIA</h5>
+                            @endif
                         </div>
                         <div class="card-footer bg-white">
                             <a href="{{ url('detail', $item->slug) }}" class="btn btn-success px-3">
