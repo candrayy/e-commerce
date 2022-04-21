@@ -14,6 +14,7 @@ use App\Http\Controllers\PakaianController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\OngkirController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\OrderController;
 
 
 /*
@@ -66,6 +67,12 @@ Route::middleware(['auth', 'cekRole'])->group(function () {
     Route::get('/edit-ongkir/{id}', [OngkirController::class, 'edit'])->name('edit-ongkir');
     Route::post('/ubah-ongkir/{id}', [OngkirController::class, 'update'])->name('ubah-ongkir');
     Route::get('/hapus-ongkir/{id}', [OngkirController::class, 'destroy'])->name('hapus-ongkir');
+
+    // Order
+    Route::get('/order', [OrderController::class, 'index'])->name('order');
+    Route::get('/edit-order/{id}', [OrderController::class, 'edit'])->name('edit-order');
+    Route::post('/ubah-order/{id}', [OrderController::class, 'update'])->name('ubah-order');
+    Route::get('/hapus-order/{id}', [OrderController::class, 'destroy'])->name('hapus-order');
 
 });
 

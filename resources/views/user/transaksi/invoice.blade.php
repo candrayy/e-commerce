@@ -241,16 +241,16 @@
                             <form>
                                 <div class="form-group">
                                     <label class="form-label">Nama Produk :</label>
-                                    <div>
-                                        @foreach($dtnama_produk as $np)
-                                            {{ $loop->iteration }}. {{ $np }} = Rp. 
-                                                @foreach($dtharga_produk as $hp)
-                                                    @if($loop->index == $loop->parent->index)
-                                                        {{ $hp }}
-                                                    @endif
-                                                @endforeach
-                                        @endforeach
-                                    </div>
+                                    @foreach($dtnama_produk as $np)
+                                        <div>
+                                        {{ $loop->iteration }}. {{ $np }} = Rp. 
+                                            @foreach($dtharga_produk as $hp)
+                                                @if($loop->index == $loop->parent->index)
+                                                    {{ $hp }}
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    @endforeach
                                 </div>
                             </form>
                             <form>

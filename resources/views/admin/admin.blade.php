@@ -95,7 +95,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('order') }}">
                     <i class="fas fa-fw fa-money-bill"></i>
                     <span>Transaksi</span>
                 </a>

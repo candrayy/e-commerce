@@ -20,7 +20,7 @@ return new class extends Migration
             // $table->unsignedBigInteger('produk_id');
             $table->json('nama_produk');
             $table->integer('total');
-            $table->string('status')->default('PENDING');
+            $table->string('status');
             $table->string('resi');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('ongkir_id')->references('id')->on('ongkirs')->onUpdate('cascade')->onDelete('cascade');
