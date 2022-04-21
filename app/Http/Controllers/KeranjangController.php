@@ -66,7 +66,6 @@ class KeranjangController extends Controller
         ]);
     
         //dd($data);
-        $data->save();
         return redirect('keranjang');
     }
 
