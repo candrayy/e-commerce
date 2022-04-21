@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Bayar</title>
+    <title>Riwayat Transaksi</title>
 
     <!-- Custom fonts for this template-->
     <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -81,7 +81,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('riwayat') }}">
+                <a class="nav-link" href="#">
                     <i class="fas fa-fw fa-money-bill"></i>
                     <span>Transaksi</span>
                 </a>
@@ -219,78 +219,40 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Pembayaranmu</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Riwayat Transaksimu</h1>
                     </div>
 
 
                     <!-- Kategori Card Example -->
-                    <!-- <div class="card shadow mb-4"> -->
-                        @foreach ($dtKeranjang as $item)
-                        <div class="card shadow mb-3" style="max-width: 100%;">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                            <img src="{{ asset('images/produk/'.$item->produk->gambar ) }}" class="img-fluid rounded-start rounded" style ="max-width: 50%" alt="...">
-                            </div>
-                            <div class="col-md-8">
-                            <div class="card-body">
-                                <div>
-                                    <lable class="fw-bolder">Nama Produk</lable>
-                                    :
-                                    <span>{{ $item->produk->nama_produk }}</span>
-                                </div>
-                                <div>
-                                    <lable class="fw-bolder">Harga Barang</lable>
-                                    :
-                                    <span>Rp {{ $item->produk->harga }}</span>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-                        @endforeach
-
-                        <div class="card shadow mb-3" style="max-width: 100%;">
-                        <div class="row g-0">
-                            <div class="col-md-8">
-                            <div class="card-body">
-                                <form action="{{ route('beli') }}" method="POST" enctype="multipart/form-data">
-                                {{ csrf_field()}}
-                                <div class="form-group">
-                                    <label for="name">Ongkir</label>
-                                    <select class="form-control" name="ongkir_id" id="ongkir_id">
-                                    @foreach($dtOngkir as $item)
-                                    <option value="{{ $item->id }}">{{ $item->kd_ongkir}} - Rp. {{ $item->ongkir }}</option>
+                    <div class="card shadow mb-4">
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">No</th>
+                                        <th scope="col">Nama Produk</th>
+                                        <th scope="col">Ongkir</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Resi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($transaksi as $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ implode(', ', $item->nama_produk)}}</td>
+                                        <td>Rp {{ $item->ongkir->ongkir }}</td>
+                                        <td>{{ $item->total }}</td>
+                                        <td>{{ $item->status }}</td>
+                                        <td>{{ $item->resi }}</td>
+                                    </tr>
                                     @endforeach
-                                    </select>
-                                </div>
-                                <!-- <div class="form-group">
-                                    <label for="name">Nama Pemesan</label>
-                                    <input type="text" id="name" name="name" class="form-control" placeholder="Masukan Nama Pemesan" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="alamat">Alamat</label>
-                                    <textarea type="text" id="alamat" name="alamat" class="form-control" placeholder="Masukan Alamat" required></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="provinsi">Provinsi</label>
-                                    <input type="text" id="provinsi" name="provinsi" class="form-control" placeholder="Masukan Nama Provinsi" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="kota">Kota</label>
-                                    <input type="text" id="kota" name="kota" class="form-control" placeholder="Masukan Nama Kota" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="kode_pos">Kode Pos</label>
-                                    <input type="text" id="kode_pos" name="kode_pos" class="form-control" placeholder="Masukan Kode Pos" required>
-                                </div> -->
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-success btn-submit">Pesan</button>
-                                </div>
-                            </div>
-                            </div>
+                                </tbody>
+                            </table>
+                            {{ $transaksi->links() }}
                         </div>
-                        </div>
-                    <!-- </div> -->
+                    </div>
 
                 </div>
                 <!-- /.container-fluid -->

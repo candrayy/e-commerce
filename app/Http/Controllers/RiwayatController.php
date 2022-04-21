@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Middleware\Auth;
-use App\Models\Kategori;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\Transaksi;
 use App\Models\Produk;
 use App\Models\Keranjang;
-use App\Models\Transaksi;
-use App\Models\User;
+use App\Models\Ongkir;
 
-class AdminController extends Controller
+class RiwayatController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,11 +20,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $kategori = Kategori::get()->count();
-        $produk = Produk::get()->count();
-        $user = User::where('role', 'adm')->get()->count();
-        $transaksi = Transaksi::get()->count();
-        return view('admin.admin', compact('kategori', 'produk', 'user', 'transaksi'));
+        $transaksi = Transaksi::where('user_id', Auth::id())->paginate(5);
+        return view('user.transaksi.riwayat', compact('transaksi'));
     }
 
     /**
