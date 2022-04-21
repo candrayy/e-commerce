@@ -250,6 +250,12 @@
                                 <i class="fas fa-cart-arrow-down"></i>
                             </button>
                         </div>
+                        @else
+                        <div class="card-footer bg-white">
+                            <button type="submit" class="btn btn-success px-3" disabled>
+                                <i class="fas fa-cart-arrow-down"></i>
+                            </button>
+                        </div>
                         @endif
                     </div>
 
