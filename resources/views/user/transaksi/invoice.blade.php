@@ -225,7 +225,7 @@
 
                     <!-- Kategori Card Example -->
                     <!-- <div class="card shadow mb-4"> -->
-                        <div class="card shadow mb-3" style="max-width: auto;">
+                        <div class="card shadow mb-3" style="max-width: 75%;">
                         <div class="row g-0">
                             <div class="col-md-8">
                             <div class="card-body">
@@ -270,6 +270,10 @@
                                     </div>
                                 </div>
                             </form>
+                            <div class="card-footer text-muted">
+                                Noted : Pembayaran via GoPay(0896-898-898), Shoopee(0896-898-898), DANA(0896-898-898)
+                            </div>
+                            </div>
                                     <!--<span>{{ dd(Session::get('cart')) }}</span>-->
                                 <!--@foreach ($np as $item => $i)
                                 <div>
@@ -286,7 +290,7 @@
                                 </div>
                                 @endforeach
 -->
-                            (when click order button (redirect to beranda) and destroy the session key of cart)
+
                             
                         </div>
                         </div>
