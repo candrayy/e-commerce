@@ -237,6 +237,7 @@
                             <a type="button" class="btn btn-success btn-sm mb-2">
                                 {{ $item->stok }}
                             </a>
+                            <p class="card-text">Kuantitas : {{ $item->kuantitas }}</p>
                             @else
                             <a type="button" class="btn btn-danger btn-sm mb-2">
                                 <span>Habis</span>

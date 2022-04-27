@@ -267,11 +267,15 @@
                                 <input type="text" id="stok" name="stok" class="form-control" placeholder="Masukan Stok Produk" required>
                             </div>
                             <div class="form-group">
-                                <label for="harga" class="form-label">Harga</label>
+                                <label for="kuantitas" class="form-label">Kuantitas Produk</label>
+                                <input type="number" id="kuantitas" name="kuantitas" min="0" class="form-control" placeholder="Masukan Kuantitas Produk" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="harga" class="form-label">Harga Produk</label>
                                 <input type="number" id="harga" name="harga" min="0" class="form-control" placeholder="Masukan Harga Produk" required>
                             </div>
                             <div class="form-group">
-                                <label for="deskripsi" class="form-label">Deskripsi Post</label>
+                                <label for="deskripsi" class="form-label">Deskripsi Produk</label>
                                 <textarea type="text" id="deskripsi" name="deskripsi" class="form-control" placeholder="Masukan Deskripsi Produk" required></textarea>
                             </div>
                             <div class="form-group">

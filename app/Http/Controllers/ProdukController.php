@@ -47,6 +47,7 @@ class ProdukController extends Controller
         $dtProduk->nama_produk = $request->nama_produk;
         $dtProduk->slug = Str::slug($request->get('nama_produk'));
         $dtProduk->stok = $request->stok;
+        $dtProduk->kuantitas = $request->kuantitas;
         $dtProduk->harga = $request->harga;
         $dtProduk->deskripsi = $request->deskripsi;
         if($request->hasfile('gambar'))
@@ -99,6 +100,7 @@ class ProdukController extends Controller
         $dtProduk->kd_produk = $request->kd_produk;
         $dtProduk->nama_produk = $request->nama_produk;
         $dtProduk->stok = $request->stok;
+        $dtProduk->kuantitas = $request->kuantitas;
         $dtProduk->harga = $request->harga;
         $dtProduk->deskripsi = $request->deskripsi;
         if($request->hasfile('gambar'))

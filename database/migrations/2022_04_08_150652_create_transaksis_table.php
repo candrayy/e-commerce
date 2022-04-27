@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('ongkir_id');
             // $table->unsignedBigInteger('produk_id');
             $table->json('nama_produk');
+            $table->json('qty');
             $table->integer('total');
             $table->string('status');
             $table->string('resi');

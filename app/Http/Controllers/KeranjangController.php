@@ -63,9 +63,10 @@ class KeranjangController extends Controller
         $data = Keranjang::create([
             'user_id' => Auth::user()->id,
             'produk_id' => $id,
+            'qty' => $request->qty,
         ]);
     
-        //dd($data);
+        // dd($data);
         return redirect('keranjang');
     }
 

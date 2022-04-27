@@ -34,24 +34,30 @@ class TransaksiController extends Controller
         // $user = Auth::user();
         $ongkir = Ongkir::where('id', $request['ongkir_id'])->get();
         $keranjang = Keranjang::with('produk')->where('user_id', Auth::user()->id)->get();
+        $produk =   Produk::select('id', 'kuantitas')->where('id', $keranjang[0]->produk_id)->get();
         foreach ($keranjang as $datas){
             $dtNamaProduk[] = $datas->produk->nama_produk;
-            $dtHargaProduk[] = $datas->produk->harga;
+            $dtHargaProduk[] = $datas->produk->harga * $datas->qty;
+            $dtQty[] = $datas->qty;
         }
         
-        $total = (count($dtNamaProduk) * $ongkir[0]['ongkir']) + array_sum($dtHargaProduk);
+        // $total = (count($dtNamaProduk) * $ongkir[0]['ongkir']) + array_sum($dtHargaProduk);
+        $total = array_sum($dtHargaProduk) + ($ongkir[0]['ongkir'] * array_sum($dtQty));
+
         $transaksi = collect([
             'user_id' => Auth::User()->id,
             'nama_produk' => $dtNamaProduk,
             'harga_produk' => $dtHargaProduk,
             'ongkir_id' => $request->ongkir_id,
+            'qty' => $dtQty,
             'total' => $total,
             'status' => 'Pending',
             'resi' => 'Tidak Ada',
         ]);
 
         $request->session()->push('carts', $transaksi);
-        // dd($dtHargaProduk);
+        
+        // dd($transaksi);
         return redirect ('invoice');
     }
 

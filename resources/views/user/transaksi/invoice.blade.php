@@ -257,7 +257,7 @@
                                 <div class="form-group">
                                     <label class="form-label">Biaya Ongkir :</label>
                                     <div>
-                                    {{ $kd_ongkir }} - Rp. {{ $harga_ongkir }} x {{ $dtcount_produk }}
+                                    {{ $kd_ongkir }} - Rp. {{ $harga_ongkir }} x ({{ $dtcount_produk }})
                                     </div>
                                 </div>
                             </form>

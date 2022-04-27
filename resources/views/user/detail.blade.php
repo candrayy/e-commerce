@@ -234,6 +234,7 @@
                         <a type="button" class="btn btn-success btn-sm mb-2">
                             {{ $detail->stok }}
                         </a>
+                        <p class="card-text">Kuantitas : {{ $detail->kuantitas }}</p>
                         @else
                             <a type="button" class="btn btn-danger btn-sm mb-2">
                                 <span>Habis</span>
@@ -246,7 +247,8 @@
                         {{ csrf_field()}}
                         @if($detail->stok == 'Tersedia')
                         <div class="card-footer bg-white">
-                            <button type="submit" class="btn btn-success px-3">
+                            <input type="number" min="0" id="qty" name="qty" class="form-control">
+                            <button type="submit" class="btn btn-success px-3 mt-2">
                                 <i class="fas fa-cart-arrow-down"></i>
                             </button>
                         </div>

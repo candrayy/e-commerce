@@ -242,8 +242,8 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ implode(', ', $item->nama_produk)}}</td>
-                                        <td>Rp {{ $item->ongkir->ongkir }}</td>
-                                        <td>{{ $item->total }}</td>
+                                        <td>{{ $item->ongkir->kd_ongkir }} - Rp. {{ $item->ongkir->ongkir }}/Pcs</td>
+                                        <td>Rp. {{ $item->total }}</td>
                                         <td>{{ $item->status }}</td>
                                         <td>{{ $item->resi }}</td>
                                     </tr>

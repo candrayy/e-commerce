@@ -236,6 +236,7 @@
                                     <tr>
                                         <th scope="col">No</th>
                                         <th scope="col">Nama Produk</th>
+                                        <th scope="col">Kuantitas</th>
                                         <th scope="col">Harga</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
@@ -245,6 +246,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->produk->nama_produk }}</td>
+                                        <td>{{ $item->qty }}</td>
                                         <td>Rp {{ $item->produk->harga }}</td>
                                         <td>
                                             <a href="{{ route('hapus-keranjang', $item->id) }}" class="btn btn-danger btn-icon btn-sm" type="button"><span>Hapus</span></a>

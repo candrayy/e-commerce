@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
@@ -28,6 +29,7 @@ class InvoiceController extends Controller
 
         // Display Produk Name
         $dtnama_produk = $transaksi[0]['nama_produk'];
+        $dtqty_produk = $transaksi[0]['qty'];
         $dtharga_produk = $transaksi[0]['harga_produk'];
 
         // Display Ongkir
@@ -40,12 +42,14 @@ class InvoiceController extends Controller
         // Display X Produk
         $keranjang = Keranjang::with('produk')->where('user_id', Auth::user()->id)->get();
         foreach ($keranjang as $datas){
-            $count_produk[] = $datas->produk->harga;
+            $count_produk[] = $datas->qty;
         }
-        $dtcount_produk = count($count_produk);
+        $dtcount_produk = array_sum($count_produk);
         
-        // dd($dtproduk_nama_harga);
-        return view('user.transaksi.invoice', compact('total', 'dtnama_produk', 'dtharga_produk', 'kd_ongkir', 'harga_ongkir', 'dtcount_produk'));
+        
+        // dd($dtqty_produk = $transaksi[0]['qty']);
+        return view('user.transaksi.invoice', compact('total', 'dtnama_produk', 'dtharga_produk', 'kd_ongkir', 'harga_ongkir',
+        'dtcount_produk', 'dtqty_produk'));
     }
 
     public function kirim(Request $request)
@@ -55,18 +59,34 @@ class InvoiceController extends Controller
             
         //     // Do stuff
         // });
-        $data = Transaksi::create([
+        Transaksi::create([
             'user_id' => $transaksi[0]['user_id'],
             'ongkir_id' => $transaksi[0]['ongkir_id'],
             'nama_produk' => $transaksi[0]['nama_produk'],
+            'qty' => json_encode($transaksi[0]['qty']),
             'total' => $transaksi[0]['total'],
             'status' => 'Pending',
             'resi' => 'Tidak Ada',
         ]);
+
+        $data = ([
+            'user_id' => $transaksi[0]['user_id'],
+            'ongkir_id' => $transaksi[0]['ongkir_id'],
+            'nama_produk' => $transaksi[0]['nama_produk'],
+            'qty' => json_encode($transaksi[0]['qty']),
+            'total' => $transaksi[0]['total'],
+            'status' => 'Pending',
+            'resi' => 'Tidak Ada',
+        ]);
+        
+        
+        // dd($data);
         $request->session()->forget('carts');
         Keranjang::where('user_id', Auth::user()->id)->delete();
-        
-        // dd($transaksi);
+        foreach($data as $key => $barang){
+            // Produk::where('nama_produk', $barang['nama_produk'])->decrement('kuantitas', $barang['qty']);
+        }
+        dd($data);
         return redirect('keranjang');
     }
 

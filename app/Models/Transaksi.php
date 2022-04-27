@@ -15,7 +15,7 @@ class Transaksi extends Model
         'nama_produk' => 'array',
     ];
     protected $fillable = [
-        'user_id', 'nama_produk', 'ongkir_id', 'total', 'status',
+        'user_id', 'nama_produk', 'ongkir_id', 'qty', 'total', 'status',
         'resi',
     ];
 
