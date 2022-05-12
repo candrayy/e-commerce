@@ -26,11 +26,7 @@ class OrderController extends Controller
         $dtOngkir = Ongkir::all();
         $dtProduk = Produk::all();
         $dtUser = User::all();
-        // foreach($transaksi as $datas){
-        //     $dtnp = $datas->nama_produk;
-        // }
-        // $dtp = $dtnp ?? null;
-        // dd($transaksi);
+        
         return view('admin.order.order', compact('transaksi', 'dtOngkir', 'dtProduk', 'dtUser'));
     }
 
@@ -75,12 +71,7 @@ class OrderController extends Controller
     public function edit($id)
     {
         $dtOrder = Transaksi::findorfail($id);
-        // if($dtOrder !== null){
-        //     foreach($dtOrder as $datas){
-        //         $dtnp = $datas->nama_produk;
-        //     }
-        //     $dtp = $dtnp ?? null;
-        // }
+       
         return view('admin.order.edit-order', compact('dtOrder'));
     }
 
@@ -98,6 +89,12 @@ class OrderController extends Controller
             'status' => $request->status,
             'resi' => $request->resi,
         ]);
+        
+        if($request->status == 'Expired') {
+            foreach(json_decode($dtOrder['qty']) as $key => $qty){
+                Produk::where('nama_produk', $dtOrder['nama_produk'][$key])->increment('kuantitas', json_decode($qty));
+            }
+        }
         return redirect('order');
     }
 

@@ -20,7 +20,7 @@ class RiwayatController extends Controller
      */
     public function index()
     {
-        $transaksi = Transaksi::where('user_id', Auth::id())->paginate(5);
+        $transaksi = Transaksi::where('user_id', Auth::id())->orderby('created_at', 'desc')->paginate(10);
         return view('user.transaksi.riwayat', compact('transaksi'));
     }
 

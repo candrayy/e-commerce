@@ -50,6 +50,9 @@
                                             <input type="email" class="form-control form-control-user"
                                                 id="email" name="email" placeholder="Masukkan Email">
                                         </div>
+                                        @error('email')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <div class="form-group">
                                             <input type="number" min="0" class="form-control form-control-user"
                                                 id="no_hp" name="no_hp" placeholder="Masukkan Nomor HP">

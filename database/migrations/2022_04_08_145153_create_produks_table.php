@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('gambar');
             $table->string('kd_produk');
             $table->string('nama_produk');
-            $table->string('stok');
             $table->string('kuantitas');
             $table->string('harga');
             $table->text('deskripsi');

@@ -23,15 +23,13 @@ class TransaksiController extends Controller
         $dtKeranjang = Keranjang::with('produk')->where('user_id', Auth::id())->get();
         $dtOngkir = Ongkir::all();
         $dtCount = Keranjang::where('user_id', Auth::id())->count();
-        // $dtProduk = Produk::select('id', 'nama', 'harga')->where('id', $dtKeranjang);
-        // dd($dtKeranjang);
+       
         return view('user.transaksi.transaksi', compact('dtKeranjang', 'dtOngkir', 'dtCount'));
     }
 
     //produk->keranjang  ->transaki     
     public function beli(Request $request)
     {
-        // $user = Auth::user();
         $ongkir = Ongkir::where('id', $request['ongkir_id'])->get();
         $keranjang = Keranjang::with('produk')->where('user_id', Auth::user()->id)->get();
         $produk =   Produk::select('id', 'kuantitas')->where('id', $keranjang[0]->produk_id)->get();
@@ -40,8 +38,7 @@ class TransaksiController extends Controller
             $dtHargaProduk[] = $datas->produk->harga * $datas->qty;
             $dtQty[] = $datas->qty;
         }
-        
-        // $total = (count($dtNamaProduk) * $ongkir[0]['ongkir']) + array_sum($dtHargaProduk);
+    
         $total = array_sum($dtHargaProduk) + ($ongkir[0]['ongkir'] * array_sum($dtQty));
 
         $transaksi = collect([

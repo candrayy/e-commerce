@@ -46,7 +46,6 @@ class ProdukController extends Controller
         $dtProduk->kd_produk = $request->kd_produk;
         $dtProduk->nama_produk = $request->nama_produk;
         $dtProduk->slug = Str::slug($request->get('nama_produk'));
-        $dtProduk->stok = $request->stok;
         $dtProduk->kuantitas = $request->kuantitas;
         $dtProduk->harga = $request->harga;
         $dtProduk->deskripsi = $request->deskripsi;
@@ -83,6 +82,7 @@ class ProdukController extends Controller
     {
         $dtKategori = kategori::all();
         $dtProduk = Produk::findorfail($id);
+        
         return view('admin.produk.edit-produk', compact('dtProduk','dtKategori'));
     }
 
@@ -105,11 +105,8 @@ class ProdukController extends Controller
         $dtProduk->deskripsi = $request->deskripsi;
         if($request->hasfile('gambar'))
         {
+            File::delete('images/produk/'.$dtProduk->gambar);
             $destination = 'images/produk/'.$dtProduk->gambar;
-            if(File::exists($destination))
-            {
-                File::delete($destination);
-            }
             $file = $request->file('gambar');
             $extention = $file->getClientOriginalExtension();
             $filename = time().'.'.$extention;

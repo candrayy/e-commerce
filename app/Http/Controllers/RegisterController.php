@@ -35,18 +35,26 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'no_hp' => $request->no_hp,
-            'alamat' => $request->alamat,
-            'provinsi' => $request->provinsi,
-            'kota' => $request->kota,
-            'kode_pos' => $request->kode_pos,
+        $validated = $request->validate([
+            'email' => 'unique:users',
         ]);
+    
+
+        if ($validated) {
+            User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'no_hp' => $request->no_hp,
+                'alamat' => $request->alamat,
+                'provinsi' => $request->provinsi,
+                'kota' => $request->kota,
+                'kode_pos' => $request->kode_pos,
+            ]);
+        }
         return redirect('login');
     }
+
 
     /**
      * Display the specified resource.
