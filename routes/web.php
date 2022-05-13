@@ -9,8 +9,6 @@ use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KeranjangController;
-use App\Http\Controllers\ElektronikController;
-use App\Http\Controllers\PakaianController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\OngkirController;
 use App\Http\Controllers\InvoiceController;
@@ -86,9 +84,6 @@ Route::middleware(['auth', 'userRole', 'revalidate'])->group(function () {
     Route::post('/tambah-keranjang/{id}', [KeranjangController::class, 'keranjangadd'])->name('tambah-keranjang');
     Route::get('/hapus-keranjang/{id}', [KeranjangController::class, 'destroy'])->name('hapus-keranjang');
 
-    // Kategori User
-    Route::get('/elektronik', [ElektronikController::class, 'index'])->name('elektronik');
-    Route::get('/pakaian', [PakaianController::class, 'index'])->name('pakaian');
 
     // Transaksi
     Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi');
@@ -100,6 +95,9 @@ Route::middleware(['auth', 'userRole', 'revalidate'])->group(function () {
 
     // Riwayat
     Route::get('/riwayat', [RiwayatController::class, 'index'])->name('riwayat');
+
+    // Hasil
+    Route::get('/hasil', [BerandaController::class, 'hasil'])->name('hasil');
 
 });
 

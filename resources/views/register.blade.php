@@ -44,40 +44,40 @@
                                     <form class="user">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
-                                                id="name" name="name" placeholder="Masukkan Nama">
+                                                id="name" name="name" placeholder="Masukkan Nama" required>
                                         </div>
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
-                                                id="email" name="email" placeholder="Masukkan Email">
+                                                id="email" name="email" placeholder="Masukkan Email" required>
                                         </div>
                                         @error('email')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                         <div class="form-group">
                                             <input type="number" min="0" class="form-control form-control-user"
-                                                id="no_hp" name="no_hp" placeholder="Masukkan Nomor HP">
+                                                id="no_hp" name="no_hp" placeholder="Masukkan Nomor HP" required>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="password" name="password" placeholder="Masukkan Password">
+                                                id="password" name="password" placeholder="Masukkan Password" required>
                                             <input type="checkbox" class="mt-2" id="checkbox">
                                             Tampilkan Password
                                         </div>
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
-                                                id="alamat" name="alamat" placeholder="Masukkan Alamat">
+                                                id="alamat" name="alamat" placeholder="Masukkan Alamat" required>
                                         </div>
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
-                                                id="provinsi" name="provinsi" placeholder="Masukkan Provinsi">
+                                                id="provinsi" name="provinsi" placeholder="Masukkan Provinsi" required>
                                         </div>
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
-                                                id="kota" name="kota" placeholder="Masukkan Kota">
+                                                id="kota" name="kota" placeholder="Masukkan Kota" required>
                                         </div>
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
-                                                id="kode_pos" name="kode_pos" placeholder="Masukkan Kode Pos">
+                                                id="kode_pos" name="kode_pos" placeholder="Masukkan Kode Pos" required>
                                         </div>
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-success btn-submit">Register</button>

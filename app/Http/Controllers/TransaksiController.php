@@ -53,8 +53,6 @@ class TransaksiController extends Controller
         ]);
 
         $request->session()->push('carts', $transaksi);
-        
-        // dd($transaksi);
         return redirect ('invoice');
     }
 

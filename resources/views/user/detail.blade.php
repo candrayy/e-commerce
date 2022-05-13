@@ -91,27 +91,6 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Kategori
-            </div>
-
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('elektronik') }}">
-                    <i class="fas fa-fw fa-blender"></i>
-                    <span>Elektronik</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('pakaian') }}">
-                    <i class="fas fa-fw fa-socks"></i>
-                    <span>Pakaian</span>
-                </a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
@@ -173,7 +152,7 @@
                     <div class="card-body">
                         <h5 class="card-title fw-bold">{{ $detail->nama_produk }}</h5>
                         @if($detail->kuantitas >= 1)
-                            <p class="text-success">{{ $detail->stok }}</p>
+                            <p class="text-success">Tersedia</p>
                             <p class="card-text">Sisa barang : {{ $detail->kuantitas }}</p>
                         @else
                             <p class="text-danger">Habis</p>

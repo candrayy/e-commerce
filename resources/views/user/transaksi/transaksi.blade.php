@@ -91,28 +91,6 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Kategori
-            </div>
-
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('elektronik') }}">
-                    <i class="fas fa-fw fa-blender"></i>
-                    <span>Elektronik</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('pakaian') }}">
-                    <i class="fas fa-fw fa-socks"></i>
-                    <span>Pakaian</span>
-                </a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>

@@ -91,28 +91,6 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Kategori
-            </div>
-
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('elektronik') }}">
-                    <i class="fas fa-fw fa-blender"></i>
-                    <span>Elektronik</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('pakaian') }}">
-                    <i class="fas fa-fw fa-socks"></i>
-                    <span>Pakaian</span>
-                </a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -166,6 +144,30 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
+                    <h1 class="h3 mb-0 text-gray-800">Filter Produk</h1>
+                    <form action="{{ route('hasil') }}" method="get">
+                            @foreach ($kategori as $ktr)
+                            @php
+                                $checked = [];
+                                if(isset($_GET['kategori_id']))
+                                {
+                                    $checked = $_GET['kategori_id'];
+                                }
+                            @endphp
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="kategori_id[]" value="{{ $ktr->id }}"
+                                @if(in_array($ktr->id, $checked)) checked @endif
+                                />
+                                <label class="form-check-label">
+                                    {{ $ktr->nama_kategori }}
+                                </label>
+                            </div>
+                            @endforeach
+                            <div class="form-group mt-2">
+                                <button id="btnFilter" type="submit" class="btn btn-primary btn-submit" disabled>Filter</button>
+                            </div>
+                    </form>
+                    <br>
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Pilihan Untukmu</h1>
                     </div>
@@ -182,7 +184,7 @@
                                     {{ $item->nama_produk }}
                                 </h5>
                                 @if($item->kuantitas >= 1)
-                                <p class="text-success">{{ $item->stok }}</p>
+                                <p class="text-success">Tersedia</p>
                                 <p class="card-text">Sisa barang : {{ $item->kuantitas }}</p>
                                 @else
                                 <p class="text-danger">Habis</p>
@@ -262,6 +264,19 @@
     <!-- Page level custom scripts -->
     <script src="assets/js/demo/chart-area-demo.js"></script>
     <script src="assets/js/demo/chart-pie-demo.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('input[type="checkbox"]').click(function(){
+                checked = $('input[type="checkbox"]').is(":checked");
+                if(checked){
+                    $('#btnFilter').attr('disabled', false);
+                }else{
+                    $('#btnFilter').attr('disabled', true);
+                }
+            });
+        });
+    </script>
 
 </body>
 

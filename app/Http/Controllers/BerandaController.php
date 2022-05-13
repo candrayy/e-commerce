@@ -22,8 +22,26 @@ class BerandaController extends Controller
     public function index()
     {
         $user = User::get()->all();
+        $kategori = Kategori::get()->all();
         $dtProduk = Produk::orderBy('id', 'desc')->paginate(5);
-        return view('user.beranda', compact('dtProduk', 'user'));
+        return view('user.beranda', compact('dtProduk', 'user', 'kategori'));
+    }
+
+    public function hasil(Request $request)
+    {
+        $kategoris = Produk::select('kategori_id')->get()->sort();
+
+        $produk = Produk::query();
+        if($request->filled('kategori_id')){
+            $produk->whereIn('kategori_id', $request->kategori_id);
+        }
+        // dd($request->kategori_id);
+        $checked = $_GET['kategori_id'];
+
+        return view('user.hasil', [
+            'kategoris' => $checked,
+            'produks' => $produk->get(),
+        ]);
     }
 
     /**

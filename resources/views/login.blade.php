@@ -44,11 +44,11 @@
                                     <form class="user">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
-                                                id="email" name="email" placeholder="Masukkan Email">
+                                                id="email" name="email" placeholder="Masukkan Email" required>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="password" name="password" placeholder="Masukkan Password">
+                                                id="password" name="password" placeholder="Masukkan Password" required>
                                             <input type="checkbox" class="mt-2" id="checkbox">
                                             Tampilkan Password
                                         </div>

@@ -20,7 +20,6 @@ class KeranjangController extends Controller
     public function index()
     {
         $dtKeranjang = Keranjang::where('user_id', Auth::id())->paginate(5);
-        //dd($dtKeranjang);
         return view('user.keranjang.keranjang', compact('dtKeranjang'));
     }
 
@@ -42,31 +41,11 @@ class KeranjangController extends Controller
      */
     public function keranjangadd(Request $request, $id)
     {
-        // if(Auth::id())
-        // {
-        //     $user = Auth::user();
-            // $ongkir = Ongkir::firstOrFail();
-            // $produk = Produk::firstOrFail();
-        //     $keranjang = new Keranjang;
-        //     $keranjang->user_id = $user->name;
-        //     $keranjang->produk_id = $produk->nama_produk;
-        //     $keranjang->ongkir_id = $ongkir->ongkir;
-        //     dd($keranjang);
-        //     $keranjang->save();
-        //     return redirect('keranjang');
-        // }
-        // else
-        // {
-        //     return redirect()->back();
-        // }
-        
         $data = Keranjang::create([
             'user_id' => Auth::user()->id,
             'produk_id' => $id,
             'qty' => $request->qty,
         ]);
-    
-        // dd($data);
         return redirect('keranjang');
     }
 
