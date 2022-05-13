@@ -83,7 +83,7 @@ class AkunController extends Controller
         $dtAkun->update([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password),
+            //'password' => bcrypt($request->password),
             'no_hp' => $request->no_hp,
             'role' => $request->role,
         ]);

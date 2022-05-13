@@ -25,15 +25,15 @@ class InvoiceController extends Controller
         $transaksi = $request->session()->get('carts');
 
         // Display Total Product
-        $total = $transaksi[0]['total'];
+        $total = end($transaksi)['total'];
 
         // Display Produk Name
-        $dtnama_produk = $transaksi[0]['nama_produk'];
-        $dtqty_produk = $transaksi[0]['qty'];
-        $dtharga_produk = $transaksi[0]['harga_produk'];
+        $dtnama_produk = end($transaksi)['nama_produk'];
+        $dtqty_produk = end($transaksi)['qty'];
+        $dtharga_produk = end($transaksi)['harga_produk'];
 
         // Display Ongkir
-        $ongkirs = Ongkir::where('id', $transaksi[0]['ongkir_id'])->get();
+        $ongkirs = Ongkir::where('id', end($transaksi)['ongkir_id'])->get();
         $kd_ongkir = $ongkirs[0]['kd_ongkir'];
 
         // Display Price Ongkir
@@ -46,8 +46,6 @@ class InvoiceController extends Controller
         }
         $dtcount_produk = array_sum($count_produk);
         
-        
-        // dd($dtqty_produk = $transaksi[0]['qty']);
         return view('user.transaksi.invoice', compact('total', 'dtnama_produk', 'dtharga_produk', 'kd_ongkir', 'harga_ongkir',
         'dtcount_produk', 'dtqty_produk'));
     }
@@ -55,38 +53,38 @@ class InvoiceController extends Controller
     public function kirim(Request $request)
     {
         $transaksi = $request->session()->get('carts');
-        // $transaksi->each(function ($item, $key) {
-            
-        //     // Do stuff
-        // });
+        $alamat = DB::table('users')->where('id', end($transaksi)['user_id'])->get();
         Transaksi::create([
-            'user_id' => $transaksi[0]['user_id'],
-            'ongkir_id' => $transaksi[0]['ongkir_id'],
-            'nama_produk' => $transaksi[0]['nama_produk'],
-            'qty' => json_encode($transaksi[0]['qty']),
-            'total' => $transaksi[0]['total'],
+            'user_id' => end($transaksi)['user_id'],
+            'alamat' => $alamat[0]->alamat,
+            'provinsi' => $alamat[0]->provinsi,
+            'kota' => $alamat[0]->kota,
+            'kode_pos' => $alamat[0]->kode_pos,
+            'ongkir_id' => end($transaksi)['ongkir_id'],
+            'nama_produk' => end($transaksi)['nama_produk'],
+            'qty' => json_encode(end($transaksi)['qty']),
+            'total' => end($transaksi)['total'],
             'status' => 'Pending',
             'resi' => 'Tidak Ada',
         ]);
 
-        $data = ([
-            'user_id' => $transaksi[0]['user_id'],
-            'ongkir_id' => $transaksi[0]['ongkir_id'],
-            'nama_produk' => $transaksi[0]['nama_produk'],
-            'qty' => json_encode($transaksi[0]['qty']),
-            'total' => $transaksi[0]['total'],
+        $data = [
+            'user_id' => end($transaksi)['user_id'],
+            'ongkir_id' => end($transaksi)['ongkir_id'],
+            'nama_produk' => end($transaksi)['nama_produk'],
+            'qty' => end($transaksi)['qty'],
+            'total' => end($transaksi)['total'],
             'status' => 'Pending',
             'resi' => 'Tidak Ada',
-        ]);
+        ];
         
-        
-        // dd($data);
         $request->session()->forget('carts');
-        Keranjang::where('user_id', Auth::user()->id)->delete();
-        foreach($data as $key => $barang){
-            // Produk::where('nama_produk', $barang['nama_produk'])->decrement('kuantitas', $barang['qty']);
+        foreach($data['qty'] as $key => $qty){
+            Produk::where('nama_produk', $data['nama_produk'][$key])->decrement('kuantitas', $qty);
         }
-        dd($data);
+        
+        Keranjang::where('user_id', Auth::user()->id)->delete();
+
         return redirect('keranjang');
     }
 

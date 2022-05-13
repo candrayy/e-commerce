@@ -131,52 +131,8 @@
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-
-                    <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
                         
                         <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -193,14 +149,6 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="{{ route('login') }}">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Login
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -226,31 +174,26 @@
                     <!-- Kategori Card Example -->
                     <div class="row">
                     @foreach ($dtProduk as $item)
-                    <div class="col-sm-6">
+                    <div class="col-4">
                         <div class="card mt-3 shadow-sm p-3 bg-body rounded">
-                        <img src="{{ asset('images/produk/'.$item->gambar ) }}" class="mx-auto" style="width: 50%; height: 50%;" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">
-                                <a>{{ $item->nama_produk }}</a>
-                            </h5>
-                            @if($item->stok == 'Tersedia')
-                            <a type="button" class="btn btn-success btn-sm mb-2">
-                                {{ $item->stok }}
-                            </a>
-                            <p class="card-text">Kuantitas : {{ $item->kuantitas }}</p>
-                            @else
-                            <a type="button" class="btn btn-danger btn-sm mb-2">
-                                <span>Habis</span>
-                            </a>
-                            @endif
-                            <p class="card-text">Harga : Rp {{ $item->harga }}</p>
-                            <p class="card-text">{!! Str::limit($item->deskripsi, 20) !!}</p>
-                        </div>
-                        <div class="card-footer bg-white">
-                            <a href="{{ url('detail', $item->slug) }}" class="btn btn-success px-3">
-                                Lihat Produk
-                            </a>
-                        </div>
+                            <img src="{{ asset('images/produk/'.$item->gambar ) }}" class="mx-auto" style="width: 95%; max-height: 50%" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">
+                                    {{ $item->nama_produk }}
+                                </h5>
+                                @if($item->kuantitas >= 1)
+                                <p class="text-success">{{ $item->stok }}</p>
+                                <p class="card-text">Sisa barang : {{ $item->kuantitas }}</p>
+                                @else
+                                <p class="text-danger">Habis</p>
+                                @endif
+                                <p class="card-text">Harga : Rp {{ $item->harga }}</p>
+                            </div>
+                            <div class="card-footer bg-white">
+                                <a href="{{ url('detail', $item->slug) }}" class="btn btn-success">
+                                    Lihat Produk
+                                </a>
+                            </div>
                         </div>
                     </div>
                     @endforeach

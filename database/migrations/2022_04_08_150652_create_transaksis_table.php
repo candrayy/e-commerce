@@ -16,6 +16,10 @@ return new class extends Migration
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->string('alamat');
+            $table->string('provinsi');
+            $table->string('kota');
+            $table->string('kode_pos');
             $table->unsignedBigInteger('ongkir_id');
             // $table->unsignedBigInteger('produk_id');
             $table->json('nama_produk');

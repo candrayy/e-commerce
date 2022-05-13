@@ -44,7 +44,7 @@
                                     <form class="user">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
-                                                id="name" name="name" placeholder="Masukkan Nama">
+                                                id="email" name="email" placeholder="Masukkan Email">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"

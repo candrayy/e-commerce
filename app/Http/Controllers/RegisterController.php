@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Auth;
 
 class RegisterController extends Controller
 {
@@ -14,7 +15,11 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        return view('register');
+        if(Auth::check()){
+            return redirect()->back();
+        } else{
+            return view('register');
+        }
     }
 
     /**
@@ -35,18 +40,26 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'no_hp' => $request->no_hp,
-            'alamat' => $request->alamat,
-            'provinsi' => $request->provinsi,
-            'kota' => $request->kota,
-            'kode_pos' => $request->kode_pos,
+        $validated = $request->validate([
+            'email' => 'unique:users',
         ]);
+    
+
+        if ($validated) {
+            User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'no_hp' => $request->no_hp,
+                'alamat' => $request->alamat,
+                'provinsi' => $request->provinsi,
+                'kota' => $request->kota,
+                'kode_pos' => $request->kode_pos,
+            ]);
+        }
         return redirect('login');
     }
+
 
     /**
      * Display the specified resource.

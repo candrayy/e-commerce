@@ -4,9 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Auth;
 
-class Role
+class RevalidateBackHistory
 {
     /**
      * Handle an incoming request.
@@ -17,15 +16,10 @@ class Role
      */
     public function handle(Request $request, Closure $next)
     {
-        // if (in_array($request->user()->role, $role)) {
-        //     return $next($request);
-        // }
-        // return redirect('/');
-            if(Auth::user()->role == 'adm')
-            {
-                return $next($request);
-            } else {
-                return redirect()->back();
-            }
+        $response = $next($request);
+        
+        return $response->header('Cache-Control','nocache, no-store, max-age=0, must-revalidate')
+            ->header('Pragma','no-cache')
+            ->header('Expires','Fri, 01 Jan 1990 00:00:00 GMT');
     }
 }
