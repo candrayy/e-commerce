@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Auth;
 
-class Role
+class UserRole
 {
     /**
      * Handle an incoming request.
@@ -17,11 +17,7 @@ class Role
      */
     public function handle(Request $request, Closure $next)
     {
-        // if (in_array($request->user()->role, $role)) {
-        //     return $next($request);
-        // }
-        // return redirect('/');
-            if(Auth::user()->role == 'adm')
+            if(Auth::user()->role == 'usr')
             {
                 return $next($request);
             } else {

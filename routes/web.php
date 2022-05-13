@@ -29,7 +29,7 @@ use App\Http\Controllers\RiwayatController;
 |
 */
 
-Route::middleware(['auth', 'cekRole', 'revalidate'])->group(function () {
+Route::middleware(['auth', 'adminRole', 'revalidate'])->group(function () {
     // Beranda Admin
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 
@@ -75,7 +75,7 @@ Route::middleware(['auth', 'cekRole', 'revalidate'])->group(function () {
 });
 
 
-Route::middleware(['auth', 'revalidate'])->group(function () {
+Route::middleware(['auth', 'userRole', 'revalidate'])->group(function () {
     
     // Beranda User
     Route::get('/beranda', [BerandaController::class, 'index'])->name('beranda');
