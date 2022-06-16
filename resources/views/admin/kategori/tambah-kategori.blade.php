@@ -180,7 +180,7 @@
                         </div>
                         <div class="card-body">
                         <form action="{{ route('simpan-kategori') }}" method="post" enctype="multipart/form-data">
-                            {{ csrf_field()}}
+                            {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="kd_kategori" class="form-label">Kode Kategori</label>
                                 <input type="text" id="kd_kategori" name="kd_kategori" class="form-control" placeholder="Masukan Kode Produk" required>

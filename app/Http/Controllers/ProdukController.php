@@ -99,7 +99,6 @@ class ProdukController extends Controller
         $dtProduk->kategori_id = $request->kategori_id;
         $dtProduk->kd_produk = $request->kd_produk;
         $dtProduk->nama_produk = $request->nama_produk;
-        $dtProduk->stok = $request->stok;
         $dtProduk->kuantitas = $request->kuantitas;
         $dtProduk->harga = $request->harga;
         $dtProduk->deskripsi = $request->deskripsi;
